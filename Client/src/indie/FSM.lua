@@ -5,7 +5,7 @@
 --状态基类
 FSMState = class("FSMState");
 
-function FSMState:initialize(name)
+function FSMState:ctor(name)
     self.mName = name;
 end
 
@@ -24,14 +24,13 @@ end
 
 --当前状态下处理逻辑
 function FSMState:HandleMsg(msg, ...)
+
 end
-
-
 
 --状态机类
 FSM = class("FSM");
 
-function FSM:initialize()
+function FSM:ctor()
     self.mStates = {};
     self.mCurState = nil;
     self.mTranslationDict = {};

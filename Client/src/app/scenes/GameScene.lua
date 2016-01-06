@@ -2,6 +2,10 @@ local GameScene = class("GameScene", function ()
 	return display.newScene("GameScene")
 end)
 
+--[[
+    总的场景 职责:管理所有场景中的东西
+]]
+
 local GameItem = require("app.nodes.GameItem")
 local GameMatrix = require("app.nodes.GameMatrix")
 local GameBox = require("app.nodes.GameBox")
@@ -9,14 +13,6 @@ local GameBox = require("app.nodes.GameBox")
 local targetPlatform = cc.Application:getInstance():getTargetPlatform()
 
 function GameScene:ctor()
-
-    -- 预先加载音效
-    audio.preloadSound("res/sound/crush.wav")
-    audio.preloadSound("res/sound/piu.wav")
-    audio.preloadSound("res/sound/push.wav")
-    audio.preloadSound("res/sound/select.wav")
-    audio.preloadSound("res/sound/tick.wav")
-    audio.preloadSound("res/sound/crushline.wav")
 
     self:initData() -- 初始化数据
     self:setupNodes() -- 设置所有子节点
@@ -93,17 +89,13 @@ function GameScene:setupNodes()
     self.game_box = GameBox.new()
                 :addTo(self)
 
-
     -- 时间 to do 要改成QNumber
     self.time_label = cc.Label:createWithSystemFont("60.00","Arial",40)
                     :pos(display.cx * 1.5,display.height - 30)
                     :addTo(self)
-
     self.time = 60
 
     self.time_label:setColor(display.COLOR_BLACK)
-
-
 
     -- 定时的东西 要分给定时器来
     local speed = 0.05
@@ -205,11 +197,8 @@ function GameScene:onTouchBegan(x, y)
     local game_matrix = self:getChildByName("matrix")
             -- 获取初始坐标
     self.began_pos_x = game_matrix:getPositionX()
-
     self.began_pos_y = game_matrix:getPositionY()
-
     self.touch_began_x = x
-
     self.touch_began_y = y
 
     -- 1010 模式
@@ -245,8 +234,8 @@ end
 
 
 function GameScene:onTouchMoved(x, y)
-
     if self.state == GAME_1010 then
+
         self.cur_matrix:pos(x - self.delta_x,y - self.delta_y)
         self.game_box:move1010(self.cur_matrix)
 
@@ -289,17 +278,13 @@ function GameScene:onTouchMoved(x, y)
             end
 
             self.game_box:cancelSelected()
-
         end
 
     -- 在滑动的时候能确定是 小三模式
     elseif self.state ==  GAME_THREE then
-
         self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
-
     end
 end
-
 
 function GameScene:crushMatrixObject()
     self.row_bricks = {}
@@ -372,13 +357,9 @@ function GameScene:onTouchEnded(x, y)
         self.cur_matrix:pos(display.cx - 33 * 1.5,display.height - 33 * 5)
     end
         self.cur_matrix = nil
-
         self.state =GAME_IDLE 
-
     elseif self.state == GAME_THREE then
-        --todo
         self.state =GAME_IDLE 
-
         if self.distance.x < -66 * 0.5 or self.distance.x > 66 * 0.5 or self.distance.y < -66 * 0.5 or self.distance.y > 66 * 0.5 then
 
             local temp = {}

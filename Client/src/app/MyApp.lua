@@ -18,8 +18,6 @@ local MyApp = class("MyApp", cc.mvc.AppBase)
 
 function MyApp:ctor()
     MyApp.super.ctor(self)
-
-
 end
 
 function MyApp:run()
@@ -29,6 +27,15 @@ function MyApp:run()
     cc.Director:getInstance():getTextureCache():addImage("pvr/all.pvr.ccz")
     cc.SpriteFrameCache:getInstance():addSpriteFrames("pvr/all.plist")
 
+    -- 预先加载音效
+    audio.preloadSound("res/sound/crush.wav")
+    audio.preloadSound("res/sound/piu.wav")
+    audio.preloadSound("res/sound/push.wav")
+    audio.preloadSound("res/sound/select.wav")
+    audio.preloadSound("res/sound/tick.wav")
+    audio.preloadSound("res/sound/crushline.wav")
+
+    -- 平台区分 屏幕适配
     if device.platform == "ios" then
 
 		if device.model == "ipad" then
