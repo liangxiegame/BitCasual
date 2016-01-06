@@ -1,0 +1,25 @@
+
+-- 角色的状态
+BOY = 1
+GIRL = 2
+CHILD = 3
+
+-- 角色的方向
+DIRECTION_NORMAL = 4
+DIRECTION_UP = 5
+DIRECTION_DOWN = 6
+DIRECTION_LEFT = 7
+DIRECTION_RIGHT = 8
+
+
+-- 游戏的状态
+GAME_IDLE = -1
+GAME_1010 = 1
+GAME_CRUSH = 2
+GAME_THREE = 3
+
+
+ITEM_DISTANCE = 100			-- 元素之间的距离
+ROW_COUNT = 6				-- 行数
+COL_COUNT = 6				-- 列数
+

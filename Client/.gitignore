@@ -1,0 +1,7 @@
+*.ccs
+*.cfg
+cocosstudio
+config.json
+frameworks
+*.rp
+runtime

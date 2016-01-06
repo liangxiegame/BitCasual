@@ -1,0 +1,1309 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"requ",
+				"require(modname)"
+			],
+			[
+				"display",
+				"display.cy	."
+			],
+			[
+				"dis",
+				"display.cx	."
+			],
+			[
+				"displaynewspri",
+				"display.newSprite(source, x, y, params)	display.newSprite-source-x-y-params"
+			],
+			[
+				"MsgDispa",
+				"MsgDispatcher	."
+			],
+			[
+				"indicat",
+				"indicatorTime"
+			],
+			[
+				"MOvingla",
+				"MovingLayer:new"
+			],
+			[
+				"Spawend",
+				"SpawnDelayedElement(time)	MovingLayer"
+			],
+			[
+				"corou",
+				"coroutine.resume(co[,val1,···])"
+			],
+			[
+				"Generator",
+				"Generator()	MovingLayer"
+			],
+			[
+				"tabel",
+				"table.sort	table.sort"
+			],
+			[
+				"Spaw",
+				"SpawnElement(inMiddle)	MovingLayer"
+			],
+			[
+				"EnableChild",
+				"EnableChild(element)	MovingLayer"
+			],
+			[
+				"active",
+				"activeElements"
+			],
+			[
+				"table",
+				"table.removebyvalue(array, value, removeall)	table.removebyvalue-array-value-removeall"
+			],
+			[
+				"m_",
+				"m_sharedGUIManager	."
+			],
+			[
+				"Msgd",
+				"MsgDispatcher.SendLogicMsg(msg, ...)	MsgDispatcher.SendLogicMsg-msg-"
+			],
+			[
+				"MsgDispatcher",
+				"MsgDispatcher.RegLogicMsg(msg, self, callback)	MsgDispatcher.RegLogicMsg-msg-self-callback"
+			],
+			[
+				"localPos",
+				"localPosition"
+			],
+			[
+				"func",
+				"function	."
+			],
+			[
+				"Movi",
+				"MovingDown"
+			],
+			[
+				"localpo",
+				"localPosition"
+			],
+			[
+				"localPo",
+				"localPosition"
+			],
+			[
+				"distanct",
+				"distanceToMax"
+			],
+			[
+				"distan",
+				"distanceToMin"
+			],
+			[
+				"Calc",
+				"CalculateDistances()	PlayerManager"
+			],
+			[
+				"Ve",
+				"Vector3	."
+			],
+			[
+				"Movin",
+				"MovinUp"
+			],
+			[
+				"playersta",
+				"playerStatus"
+			],
+			[
+				"gameObj",
+				"gameObject	(HomeViewController.lua)"
+			],
+			[
+				"reqi",
+				"require(modname)"
+			],
+			[
+				"m_shre",
+				"m_sharedInputManager	."
+			],
+			[
+				"Create",
+				"CreateLuaBehaviour"
+			],
+			[
+				"class",
+				"class(classname, super)	."
+			],
+			[
+				"Update",
+				"Update()	LoadingUI"
+			],
+			[
+				"misionda",
+				"missionDataString"
+			],
+			[
+				"mss",
+				"missionID"
+			],
+			[
+				"miss",
+				"missionDataString"
+			],
+			[
+				"Savea",
+				"SaveManager	."
+			],
+			[
+				"Savae",
+				"SaveManager	."
+			],
+			[
+				"Start",
+				"Start()	GUIManager"
+			],
+			[
+				"for",
+				"fori	for i,v in ipairs()"
+			],
+			[
+				"funct",
+				"function〔keyword〕"
+			],
+			[
+				"buy_",
+				"buy_layer	."
+			],
+			[
+				"cal",
+				"callback"
+			],
+			[
+				"getString",
+				"getStringForKey	(SDKProxy.cpp)"
+			],
+			[
+				"getStringF",
+				"getStringForKey(pKey, defaultValue)	UserDefault"
+			],
+			[
+				"schedule",
+				"schedule(callback, interval)	Node"
+			],
+			[
+				"buy",
+				"buy_layer	."
+			],
+			[
+				"removeFr",
+				"removeFromParent()	Node"
+			],
+			[
+				"scaleto",
+				"scaleTo(time, scale)	Node"
+			],
+			[
+				"uiloader",
+				"uiloader:load	(GameUI.lua)"
+			],
+			[
+				"Sim",
+				"SimpleProxy	(SimpleProxy.h)"
+			],
+			[
+				"Simpo",
+				"SimpleProxy_hpp	(SimpleProxy.h)"
+			],
+			[
+				"getwork",
+				"get_workdir〔function〕"
+			],
+			[
+				"setGra",
+				"setGravityEnable(enable)	PhysicsBody"
+			],
+			[
+				"getPositi",
+				"getPositionX()	UIStretch"
+			],
+			[
+				"barri",
+				"barriers"
+			],
+			[
+				"pusha",
+				"push(tb, value)	TableUtil"
+			],
+			[
+				"wi",
+				"width	."
+			],
+			[
+				"barriers",
+				"barriers_unused"
+			],
+			[
+				"mathra",
+				"math.newrandomseed()	."
+			],
+			[
+				"PhysicsBodybox",
+				"PhysicsBody:createBox	(Sky.lua)"
+			],
+			[
+				"getMa",
+				"getMass()	PhysicsShape"
+			],
+			[
+				"setRota",
+				"setRotationEnable(enable)	PhysicsBody"
+			],
+			[
+				"setrota",
+				"setRotationEnable(enable)	PhysicsBody"
+			],
+			[
+				"setma",
+				"setMass(mass)	PhysicsBody"
+			],
+			[
+				"settag",
+				"setTag(tag)	PhysicsShape"
+			],
+			[
+				"setreso",
+				"setRestitution(restitution)	PhysicsContactPreSolve"
+			],
+			[
+				"contact",
+				"contactShape	."
+			],
+			[
+				"PhyscShape",
+				"PhysicsShapeBox	."
+			],
+			[
+				"setRe",
+				"setRestitution(restitution)	PhysicsContactPreSolve"
+			],
+			[
+				"setMa",
+				"setMass(mass)	PhysicsBody"
+			],
+			[
+				"PhysicsBodycreatebo",
+				"PhysicsBody:createBox(size, material, offset)	."
+			],
+			[
+				"fun",
+				"fun	function"
+			],
+			[
+				"function",
+				"function	."
+			],
+			[
+				"bitma",
+				"block:setCollisionBitmask(1	(Hero.lua)"
+			],
+			[
+				"setResi",
+				"setRestitution(restitution)	PhysicsContactPreSolve"
+			],
+			[
+				"bottomEdge",
+				"bottomEdgeBody"
+			],
+			[
+				"setResti",
+				"setRestitution(restitution)	PhysicsShape"
+			],
+			[
+				"setRes",
+				"setResting(rest)	PhysicsBody"
+			],
+			[
+				"PhysCreateEdge",
+				"PhysicsBody:createEdgeBox(size, material, border, offset)	."
+			],
+			[
+				"Physcecreate",
+				"PhysicsShapeEdgeBox:create(size, material, border, offset)	."
+			],
+			[
+				"Physccreateedge",
+				"PhysicsBody:createEdgeSegment(a, b, material, border)	."
+			],
+			[
+				"Physce",
+				"PhysicsBody:create	(PhysicsTest.lua)"
+			],
+			[
+				"Prot",
+				"PrototypeScene	."
+			],
+			[
+				"reloadMo",
+				"reloadModule(moduleName)	reloadModule-moduleName"
+			],
+			[
+				"randomPoo",
+				"randomPoolSize	."
+			],
+			[
+				"inse",
+				"insert"
+			],
+			[
+				"search",
+				"searchPath	."
+			],
+			[
+				"init",
+				"init()	ControlColourPicker"
+			],
+			[
+				"FIleU",
+				"FileUtils:getInstance()	."
+			],
+			[
+				"setDIspla",
+				"setDisplayStats(displayStats)	Director"
+			],
+			[
+				"erro",
+				"errorMessage"
+			],
+			[
+				"err",
+				"errorMessage"
+			],
+			[
+				"gsub",
+				"string.gsub(s,pattern,repl[,n])"
+			],
+			[
+				"TIleMpa",
+				"TileMapAtlas:create(tile, mapFile, tileWidth, tileHeight)	."
+			],
+			[
+				"begin_index",
+				"begin_index_y	."
+			],
+			[
+				"brick",
+				"brick_matrices"
+			],
+			[
+				"matrix1_",
+				"matrix1_can_push"
+			],
+			[
+				"brick_matrix",
+				"brick_matrix_index"
+			],
+			[
+				"brick_",
+				"brick_matrix"
+			],
+			[
+				"matrix1",
+				"matrix1_dirty"
+			],
+			[
+				"brick_matri",
+				"brick_matrices"
+			],
+			[
+				"can",
+				"canPush(matrix, i, j)	GameModel"
+			],
+			[
+				"fal",
+				"falldown_effects	(BaseBrick.lua)"
+			],
+			[
+				"getPo",
+				"getPositionY()	UIStretch"
+			],
+			[
+				"getPos",
+				"getPositionX()	UIStretch"
+			],
+			[
+				"falld",
+				"falldown_effects	(GameView.lua)"
+			],
+			[
+				"falldown",
+				"falldown_effects	(GameModel.lua)"
+			],
+			[
+				"falldown_ef",
+				"falldown_effects"
+			],
+			[
+				"fucn",
+				"function	."
+			],
+			[
+				"enters",
+				"enterScene(sceneName, args, transitionType, time, more)	AppBase"
+			],
+			[
+				"in_shap",
+				"in_shaping	."
+			],
+			[
+				"falldow",
+				"falldown_effect	."
+			],
+			[
+				"onTouchEn",
+				"onTouchEnded(x, y)	GameModel"
+			],
+			[
+				"audiostop",
+				"audio.stopMusic(isReleaseData)	."
+			],
+			[
+				"show_ui_p",
+				"show_ui_prompt"
+			],
+			[
+				"loader",
+				"package.loaders"
+			],
+			[
+				"ALL_",
+				"ALL_CLEAR_COUNT	."
+			],
+			[
+				"ALL",
+				"ALL_CLEAR_COUNT	."
+			],
+			[
+				"tonumb",
+				"tonumber(e[,base])"
+			],
+			[
+				"displayframe",
+				"display.newSpriteFrame(frameName)	."
+			],
+			[
+				"setTexture",
+				"setTexture(texture)	Sprite"
+			],
+			[
+				"Sprite",
+				"Sprite:createWithSpriteFrame(spriteFrame)	."
+			],
+			[
+				"getSpriteframe",
+				"getSpriteFrame()	Sprite"
+			],
+			[
+				"removefor",
+				"removeFromParent()	Node"
+			],
+			[
+				"animat",
+				"animation	."
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/sublimeassembly/NASM.sublime-build",
+					""
+				],
+				[
+					"Packages/sublimeassembly/NASM.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/sublimeassembly/NASM.sublime-build",
+				"Run"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": ":w",
+		"selected_items":
+		[
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				":",
+				":w - Save"
+			],
+			[
+				":wq",
+				"Snippet: ccDrawQuadBezier-origin-control-destination-segments"
+			],
+			[
+				"Package Contr:ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: upda",
+				"Package Control: Upgrade Package"
+			]
+		],
+		"width": 880.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"asd",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"package control",
+			"package",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			"package controll",
+			"package ",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os; pf = 'PackageControl.sublime-package'; ipp = sublime.installed_packages_path();urllib.request.install_opener( urllib.request.build_opener(urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf),'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace('','%20')).read())",
+			"import urllib2,os; pf='PackageControl.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs(ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf),'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( '','%20' )).read()); print( 'Please restart Sublime Text to finishinstallation')",
+			"import urllib.request,os; pf = 'PackageControl.sublime-package'; ipp = sublime.installed_packages_path();urllib.request.install_opener( urllib.request.build_opener(urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf),'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace('','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/liangxie/Desktop/work/PokerFinal",
+		"/Users/liangxie/Desktop/work/PokerFinal/res",
+		"/Users/liangxie/Desktop/work/PokerFinal/res/pvr",
+		"/Users/liangxie/Desktop/work/PokerFinal/runtime",
+		"/Users/liangxie/Desktop/work/PokerFinal/src",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/gui",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/scenes",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/utils",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/indie"
+	],
+	"file_history":
+	[
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/scenes/HomeScene.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/utils/GUIUtil.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/gui/QNumber.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/utils/GUIUtil",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/utils/UIFactory",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/nodes/GameMatrix.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/MyApp.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/scenes/GameScene.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/framework/display.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/indie/MsgDispatcher.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/framework/cocos2dx/SpriteEx.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/cocos/framework/extends/SpriteEx.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/framework/cocos2dx/SceneEx.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/framework/cocos2dx/NodeEx.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/indie/init.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/config.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/framework/functions.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/nodes/GameItem.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/AppConstants.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/model/matrices.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/indie/FSM.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/framework/cc/components/behavior/StateMachine.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/main.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/WuShuang/Data/Role.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/WuShuang/Data/Item.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/WuShuang/Data/Equip.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/WuShuang/Data/Corps.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/WuShuang/Data/Commander.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/untitled.sublime-project",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/cocos/cocos2d/bitExtend.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/scenes/GameOver.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/Wrapper/ResMgrWrapper.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/Wrapper/UIEventListenerWrapper.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/utils/TableUtil.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/WuShuang/Data/Card.lua",
+		"/Users/liangxie/Desktop/work/PokerFinal/src/app/LuaProject/LuaProject.luaproj.meta",
+		"/Users/liangxie/Downloads/Farm new nen/9秒社团.txt",
+		"/Users/liangxie/Library/Application Support/Sublime Text 3/Packages/RunQuickSimulator/RunQuickSimulator.py",
+		"/Users/liangxie/Desktop/work/PhysicsCrushQuick/src/app/nodes/GameSprite.lua",
+		"/Users/liangxie/Library/Application Support/Sublime Text 3/Packages/User/quick-comminuty-dev.sublime-settings",
+		"/Users/liangxie/git/ParkourUnity/Client/Assets/Scripts/App/CalCode.command",
+		"/Users/liangxie/Desktop/unityproject/无双backup/Project/Client/Assets/StreamingAssets/LuaProject/SublimeProj/Sublime",
+		"/Users/liangxie/Desktop/学习资料/bbdc_k12-release/lua_example/sqlite3/simple.lua",
+		"/Users/liangxie/Desktop/unityproject/New Unity Project/Assets/uLua/Examples/04_ScriptsFromFile/ScriptsFromFile02.lua",
+		"/Users/liangxie/Desktop/bibobox/bibobox/FindSeaFinal/Resources/stage.xml",
+		"/Users/liangxie/Desktop/学习资料/wushuang/Project/Client/Assets/Script/Test/ResolutionAdapter.cs",
+		"/Users/liangxie/Desktop/work/BitRunner/AirGame-master/Assets/1.xml",
+		"/Users/liangxie/Desktop/unityproject/PaokuFinal/Assets/[Scene]/[PlayScene].unity",
+		"/Users/liangxie/Desktop/work/DigMachineENSDK/srcback/app/gui/Number.lua",
+		"/Users/liangxie/Desktop/work/DigMachineENSDK/srcback/app/data/MatricesData.lua",
+		"/Users/liangxie/Desktop/work/DigMachineENSDK/srcback/app/data/UserData.lua",
+		"/Users/liangxie/Desktop/work/DigMachineENSDK/frameworks/cocos2d-x/cocos/base/CCDirector.cpp",
+		"/Users/liangxie/Desktop/work/DigMachineENSDK/frameworks/cocos2d-x/cocos/2d/CCActionGrid3D.cpp",
+		"/Users/liangxie/Desktop/unityproject/PaokuFinal/Assets/Scripts/Game_Manager.cs",
+		"/Users/liangxie/Downloads/wordpress.2015-06-04.xml",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Module/Game/Controller/MovingLayer.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/GameTest.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Managers/InputManager.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Module/Game/Controller/Overlord.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Managers/GUIManager.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Managers/LevelManager.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Managers/PlayerManager.lua",
+		"/Users/liangxie/Desktop/unityproject/HaiNanFinal/Assets/StreamingAssets/LuaProject/App/Module/Game/Controller/LevelGenerator.lua",
+		"/Users/liangxie/Desktop/unityproject/RunnerFinal/Assets/StreamingAssets/LuaProject/App/Managers/PlayerManager.lua",
+		"/Users/liangxie/Desktop/unityproject/RunnerFinal/Assets/StreamingAssets/LuaProject/Framework/Utility.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/Demo/SelectHero/SelectHeroScene.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/Wrapper/UIEventListenerWrapper.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/Demo/LoadingUI.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/App/Home/View/HomeUI.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/App/Home/View/HomeScene.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Utility.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/App/GUI/LoadingUI.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/App/Main.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/App/Home/Controller/HomeViewController.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/App/Game/GameSceneLoading.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/Demo/SelectHero/SelectHero.lua",
+		"/Users/liangxie/Desktop/unityproject/RunFinal/Assets/StreamingAssets/LuaProject/Demo/Game.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Demo/SelectHero/SelectHero.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Game/LuaGo/CanvasGo.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Game/Home/HomeSceneLoading.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Game/LuaGO/OverlordGo.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Game/Home/HomeScene.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Managers/InputManager.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Managers/SaveManager.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Managers/GUIManager.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Game/Main.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Managers/PlayerManager.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Game/GUI/LoadingUI.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Utility.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/Managers/AudioManager.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Framework/MsgDispatcher.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Demo/LoadingUI.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Demo/Game.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Demo/Fight/FightHero.lua.meta",
+		"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Lib/CJson/json2lua.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/final/Assets/StreamingAssets/LuaProject/Lib/CJson/cjson/util.lua",
+		"/Applications/Unity/MonoDevelop.app/Contents/Frameworks/Mono.framework/Versions/2.10.12/etc/gtk-2.0/gtkrc",
+		"/Users/liangxie/Desktop/NGUI/ReadMe - 3.7.5.txt",
+		"/Users/liangxie/Downloads/非常跑酷资源包.txt",
+		"/Users/liangxie/Desktop/unityproject/LuaTetrisDemo-master 2/Assets/Lua/containers.lua",
+		"/Users/liangxie/Desktop/work/BitRunner/panda_run-master/main.js",
+		"/Users/liangxie/Quick-Cocos2dx-Community/setup_mac.sh",
+		"/Users/liangxie/Desktop/work/panda_run-master/src/layer/game-background-layer.js",
+		"/Users/liangxie/Desktop/学习资料/bbdc_k12-release/lua_example/sqlite3/function.lua",
+		"/Users/liangxie/Desktop/常用脚本/brick加密android.command",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/src/app/modules/game/view/GameUI.lua",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/src/config.lua",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/src/app/modules/game/view/BuyLayer.lua",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/src/app/scenes/RelicScene.lua",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/manual/sdk/IXCC2dxProxy.h",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/manual/sdk/SimpleProxy.h",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/lua_sdk_auto.hpp",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/lua_sdk_auto.cpp",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/src/framework/cocos2dx/NodeEx.lua",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/src/app/modules/game/node/FalldownEffect.lua",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/manual/sdk/SimpleProxy.cpp",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/manual/sdk/IXCC2dxProxy.cpp",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/proj.android/Android.mk",
+		"/Users/liangxie/Desktop/work/DigMachineCHSDK/frameworks/cocos2d-x/cocos/scripting/lua-bindings/CMakeLists.txt",
+		"/Users/liangxie/Desktop/work/DigMachineCH/src/app/modules/game/view/GameUI.lua",
+		"/Users/liangxie/Music/iTunes/iTunes Media/Mobile Applications/Bit Casual 1.0/iTunesArtwork",
+		"/Users/liangxie/git/iCare/res/drawable/cancel_button_bg.xml",
+		"/Users/liangxie/git/iCare/src/c701/icare/model/Default_Setting.java",
+		"/Users/liangxie/git/iCare/src/c701/icare/model/UserInformation.java",
+		"/Users/liangxie/git/iCare/src/c701/icare/model/Friends.java",
+		"/Users/liangxie/git/iCare/src/c701/icare/view/SettingActivity.java",
+		"/Users/liangxie/git/iCare/src/c701/icare/view/Welcome.java",
+		"/Users/liangxie/git/iCare/src/c701/icare/controler/AMapUtil.java"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/liangxie/Desktop/work/PokerFinal/src",
+			"/Users/liangxie/Desktop/work/DigMachineENSDK/frameworks/cocos2d-x",
+			"/Users/liangxie/Desktop/work/DigMachineENSDK/srcback/app",
+			"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject",
+			"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Demo/Fight",
+			"/Users/liangxie/Desktop/work/BitRunner/RunFinal/Assets/StreamingAssets/LuaProject/Demo",
+			"/Users/liangxie/Desktop/work/BitRunner/BitRunner/src",
+			"/Users/liangxie/Desktop/work/BitRunner/BitRunner/src/cocos",
+			"/Users/liangxie/Desktop/work/BitRunner/BitRunner/src/app/modules",
+			"/Users/liangxie/Desktop/work/BitRunner/BitRunner/src",
+			"/Users/liangxie/Desktop/work/BitRunner/BitRunner",
+			"/Users/liangxie/Desktop/work/DigMachineBeta/src/app",
+			"/Users/liangxie/Desktop/work/DigMachineBeta",
+			"/Users/liangxie/Desktop/work/DigMachineAlpha/src/app",
+			"/Users/liangxie/Desktop/work/DigMachineAlpha/src",
+			"/Users/liangxie/Desktop/work/DigMachineAlpha/src/app",
+			"/Users/liangxie/Desktop/work/brickquick35/src/app",
+			"/Users/liangxie/Desktop/work/brickquick35/src",
+			"/Users/liangxie/Desktop/work/qgl",
+			"/Users/liangxie/Desktop/work/qgl/src",
+			"/Users/liangxie/Desktop/work/qgl/src/app",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src/app/modules",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src/app",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src/app/modules/game",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src/app",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src",
+			"/Users/liangxie/Desktop/work/BrickQuick35/res",
+			"/Users/liangxie/Desktop/work/BrickQuick35/src",
+			"/Users/liangxie/Desktop/work/PokerFinal/src",
+			"/Users/liangxie/Desktop/work/PokerFinal/src/app/reference",
+			"/Users/liangxie/Desktop/work/BrickQuick35"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"QPRINT",
+			"game_normal",
+			"Debug.logerror",
+			"then",
+			") ",
+			"Utility",
+			"class(",
+			"()\n",
+			"CSBUtil",
+			"for (",
+			"drawscene",
+			"main",
+			"for",
+			"self.spa",
+			"speedmul",
+			"speed",
+			"speedmul",
+			"moving",
+			"speedmultiplier",
+			"SpawnElement",
+			"spawnelement",
+			"remove",
+			"remoevele",
+			"self.activeElements",
+			"play",
+			"self.paused",
+			"spawnelement",
+			"update",
+			"SpawnDelayedElement",
+			"self.spawnDe",
+			"update",
+			"SpawnDelayedElement",
+			"startcroutine",
+			"removeelement",
+			"update",
+			"generator",
+			"coroutine",
+			"generator",
+			"spawn",
+			"self:spaw",
+			"self.spawnd",
+			"start",
+			"initialize",
+			"public",
+			"//",
+			"new",
+			"SelectHeroScene",
+			"SelectHeroSceneLoading",
+			"component",
+			"addcomponent",
+			"open",
+			"openli",
+			"ended",
+			"callback",
+			"login",
+			"pay",
+			"game_over",
+			"ended",
+			"removefromParent",
+			"end",
+			"ui",
+			"prompt",
+			"relic",
+			"ended",
+			"order_id",
+			"add_gold",
+			"user_id",
+			"getstring",
+			"userdef",
+			"getuser",
+			"onenter",
+			"start",
+			"login",
+			"buy",
+			"btn",
+			"registerEvent",
+			"cclog",
+			"simple",
+			"cclog",
+			"IXUserActionListenerimpl",
+			"ixuseractionlisten",
+			"cclog",
+			"log",
+			"cclog",
+			"my",
+			"sdk",
+			"prompt",
+			"prompt_en",
+			"prompt",
+			"onenter",
+			"prop_prices",
+			"prop",
+			"PropButton",
+			"prop",
+			"prop1",
+			"swollow",
+			"_en",
+			"button",
+			"logic",
+			"applyforce",
+			"material_defa",
+			"material",
+			"cc.physicsmaterial",
+			"physic",
+			"offset",
+			"pos",
+			"physics",
+			"contacttest",
+			"contact",
+			"event",
+			"coli",
+			"bounce",
+			"edge",
+			"physics",
+			"Debugdraw",
+			"physics",
+			"physic",
+			"prototype",
+			"WebSocket",
+			"SimpleAudioEngine",
+			"CCBReader",
+			"cc.Scale9Sprite",
+			"DeprecatedNetworkFunc.lua",
+			"CCDirector",
+			"CCProgressTo",
+			"GUIReader",
+			"UIRootWidget",
+			"zerobrane"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 126.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "Packages/sublimeassembly/NASM.sublime-build",
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"homescen",
+				"src/app/scenes/HomeScene.lua"
+			],
+			[
+				"gamema",
+				"src/app/nodes/GameMatrix.lua"
+			],
+			[
+				"msgdi",
+				"src/indie/MsgDispatcher.lua"
+			],
+			[
+				"sprite",
+				"src/cocos/framework/extends/SpriteEx.lua"
+			],
+			[
+				"node",
+				"src/framework/cocos2dx/NodeEx.lua"
+			],
+			[
+				"scene",
+				"src/framework/cocos2dx/SceneEx.lua"
+			],
+			[
+				"constants",
+				"src/app/AppConstants.lua"
+			],
+			[
+				"matri",
+				"src/app/model/matrices.lua"
+			],
+			[
+				"statema",
+				"src/framework/cc/components/behavior/StateMachine.lua"
+			],
+			[
+				"fsm",
+				"src/indie/FSM.lua"
+			],
+			[
+				"myapp",
+				"src/app/MyApp.lua"
+			],
+			[
+				"myap",
+				"src/app/MyApp.lua"
+			],
+			[
+				"main",
+				"src/main.lua"
+			],
+			[
+				"tabelu",
+				"src/app/utils/TableUtil.lua"
+			],
+			[
+				"csbu",
+				"src/app/util/CSBUtil.lua"
+			],
+			[
+				"director",
+				"frameworks/cocos2d-x/cocos/base/CCDirector.cpp"
+			],
+			[
+				"msgdispatcher",
+				"Framework/MsgDispatcher.lua"
+			],
+			[
+				"func",
+				"lua_example/sqlite3/function.lua"
+			],
+			[
+				"lua-sdk",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/lua_sdk_auto.cpp"
+			],
+			[
+				"uicrea",
+				"src/app/gui/UICreator.lua"
+			],
+			[
+				"physicsbo",
+				"frameworks/cocos2d-x/cocos/physics/CCPhysicsBody.cpp"
+			],
+			[
+				"physicsbody",
+				"frameworks/cocos2d-x/cocos/physics/CCPhysicsBody.cpp"
+			],
+			[
+				"exten",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/script/extension/ExtensionConstants.lua"
+			],
+			[
+				"shape",
+				"frameworks/cocos2d-x/cocos/physics/CCPhysicsShape.cpp"
+			],
+			[
+				"physicsshape",
+				"frameworks/cocos2d-x/cocos/physics/CCPhysicsShape.cpp"
+			],
+			[
+				"physics",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/api/PhysicsContact.lua"
+			],
+			[
+				"physicsshape.cpp",
+				"frameworks/cocos2d-x/cocos/physics/CCPhysicsShape.cpp"
+			],
+			[
+				"deprecatedextensionfunc.lua",
+				"src/cocos/extension/DeprecatedExtensionFunc.lua"
+			],
+			[
+				"deprecateduifunc.lua",
+				"src/cocos/ui/DeprecatedUIFunc.lua"
+			],
+			[
+				"deprecatednetworkfunc.lua",
+				"src/cocos/network/DeprecatedNetworkFunc.lua"
+			],
+			[
+				"splash",
+				"src/scene/splash-scene.js"
+			],
+			[
+				"tilemap",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/api/TileMapAtlas.lua"
+			],
+			[
+				"spriteframe",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/api/SpriteFrame.lua"
+			],
+			[
+				"spriteframca",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/api/SpriteFrameCache.lua"
+			],
+			[
+				"textureca",
+				"frameworks/cocos2d-x/cocos/renderer/CCTextureCache.cpp"
+			],
+			[
+				"texturecahce",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/api/TextureCache.lua"
+			],
+			[
+				"spriteframeca",
+				"frameworks/cocos2d-x/cocos/2d/CCSpriteFrameCache.cpp"
+			],
+			[
+				"display",
+				"src/framework/display.lua"
+			],
+			[
+				"audio",
+				"src/framework/audio.lua"
+			],
+			[
+				"csloader",
+				"frameworks/cocos2d-x/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.cpp"
+			],
+			[
+				"actiontimeline",
+				"frameworks/cocos2d-x/cocos/scripting/lua-bindings/auto/api/ActionTimeline.lua"
+			],
+			[
+				"gameview",
+				"src/app/modules/game/view/GameView.lua"
+			],
+			[
+				"startscene",
+				"src/app/scenes/StartScene.lua"
+			],
+			[
+				"uiloader",
+				"src/framework/cc/uiloader/uiloader.lua"
+			],
+			[
+				"nodeex",
+				"src/framework/cocos2dx/NodeEx.lua"
+			],
+			[
+				"startscene.lua",
+				"src/app/scenes/StartScene.lua"
+			],
+			[
+				"ccnode",
+				"frameworks/cocos2d-x/cocos/2d/CCNode.cpp"
+			],
+			[
+				"ccscene",
+				"frameworks/cocos2d-x/cocos/2d/CCScene.cpp"
+			],
+			[
+				"mya",
+				"src/app/MyApp.lua"
+			],
+			[
+				"gamemodel",
+				"src/app/modules/game/model/GameModel.lua"
+			],
+			[
+				"digmac",
+				"src/app/node/DigMachine.lua"
+			],
+			[
+				"skeletonanimation",
+				"frameworks/cocos2d-x/cocos/editor-support/spine/SkeletonAnimation.cpp"
+			],
+			[
+				"sp.spineanimation",
+				"frameworks/runtime-src/proj.android/obj/local/armeabi/objs-debug/spine_static/Animation.o.d"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 326.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
