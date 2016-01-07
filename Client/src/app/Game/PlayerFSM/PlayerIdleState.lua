@@ -1,8 +1,15 @@
 
-require("app.Game.PlayerFSM.PlayerState")
+local PlayerState = require("app.Game.PlayerFSM.PlayerState")
 
-PlayerIdleState = class("PlayerIdleState",PlayerState)
+local PlayerIdleState = class("PlayerIdleState",PlayerState)
 
+-- 默认状态
 function PlayerIdleState:OnEnter()
-	QPrint("player Idle state: on enter")
+	QPrint("Idle:OnEnter")
 end
+
+function PlayerIdleState:OnExit()
+	QPrint("Idle:OnExit")
+end
+
+return PlayerIdleState

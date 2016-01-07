@@ -13,39 +13,15 @@ local GameBox = require("app.nodes.GameBox")
 local targetPlatform = cc.Application:getInstance():getTargetPlatform()
 
 function GameScene:ctor()
-
-    self:initData() -- 初始化数据
+    self:initModel() -- 初始化数据
     self:setupNodes() -- 设置所有子节点
     self:registerEvent() -- 注册事件
 
-    -- 平台区分 用来加第三方平台的
-     if (cc.PLATFORM_OS_IPHONE == targetPlatform) or (cc.PLATFORM_OS_IPAD == targetPlatform) then
-        local args = { num1 = 2 , num2 = 3 }
-        local luaoc = require "cocos.cocos2d.luaoc"
-        local className = "LuaObjectCBridgeTest"
-        -- local ok,ret  = luaoc.callStaticMethod(className,"isFullLoadedOC")
-        -- local ok,ret  = luaoc.callStaticMethod(className,"isFullLoadedOC",args)
-        -- if not ok then
-            -- cc.Director:getInstance():resume()
-        -- else
-            -- print("The ret is:", ret)
-        -- end
-            luaoc.callStaticMethod(className,"loadFullOC")
-
-            local function callback(param)
-            if "success" == param then
-                print("object c call back success")
-            end
-        end
-
-        luaoc.callStaticMethod(className,"registerScriptHandler", {scriptHandler = callback } )
-        luaoc.callStaticMethod(className,"callbackScriptHandler")
-    end
+    NativeUtil.PreloadFullAd() -- 预加载广告
 end
 
--- 初始化数据
-function GameScene:initData()
-
+-- 初始化模型数据 
+function GameScene:initModel()
     self.touch_id = -1
     self.remain_step = 100
     self.object_count = 0
@@ -63,6 +39,30 @@ function GameScene:initData()
             self.temp_data[i][j] = 0
         end
     end
+
+    -- 状态机设置
+    self.fsm = FSM.new()
+
+    local Player1010State = require("app.Game.PlayerFSM.Player1010State")
+    local PlayerCrushState = require("app.Game.PlayerFSM.PlayerCrushState")
+    local PlayerIdleState = require("app.Game.PlayerFSM.PlayerIdleState")
+    local PlayerThreeState = require("app.Game.PlayerFSM.PlayerThreeState")
+
+    local stateIdle = PlayerIdleState.new("idle",self)
+    local stateCrush = PlayerCrushState.new("crush",self)
+    local state1010  = Player1010State.new("1010",self)
+    local stateThree = PlayerThreeState.new("three",self)
+
+    self.fsm:AddState(stateIdle)
+    self.fsm:AddState(stateCrush)
+    self.fsm:AddState(state1010)
+    self.fsm:AddState(stateThree)
+
+    self.fsm:AddTranslation(stateIdle, "1010", state1010)
+    self.fsm:AddTranslation(stateIdle, "crush", stateCrush)
+    self.fsm:AddTranslation(stateIdle, "three", stateThree)
+
+    self.fsm:Start(stateIdle)
 end
 
 function GameScene:setupNodes()
@@ -71,10 +71,15 @@ function GameScene:setupNodes()
     local colorWhite = cc.LayerColor:create(cc.c4b(255,255,255,255))
                         :addTo(self)
 
-    -- 测试组快
-    local game_matrix = GameMatrix.new()
-                        :pos(display.width - ITEM_DISTANCE * 1.5,display.height - ITEM_DISTANCE * 5)
+
+    -- 1010 块
+    self.mMatrixNode = GameMatrix.new()
+                        -- :pos(display.width - ITEM_DISTANCE * 2.5,display.height - ITEM_DISTANCE * 4)
+                        -- :scale(0.8)
+                        :reset()
                         :addTo(self)
+
+    local game_matrix = self.mMatrixNode
 
     if cc.PLATFORM_OS_IPAD == targetPlatform then
         game_matrix:scale(0.5)
@@ -157,7 +162,6 @@ function GameScene:addCount(count)
     self.count_label:setString(string.format("score:%d", self.count))
 end
 
-
 -- 注册触摸事件
 function GameScene:registerEvent()
 
@@ -194,36 +198,32 @@ function GameScene:registerEvent()
 end
 
 function GameScene:onTouchBegan(x, y)
-    local game_matrix = self:getChildByName("matrix")
-            -- 获取初始坐标
-    self.began_pos_x = game_matrix:getPositionX()
-    self.began_pos_y = game_matrix:getPositionY()
+    -- 获取初始坐标
+    self.began_pos_x = self.mMatrixNode:getPositionX()
+    self.began_pos_y = self.mMatrixNode:getPositionY()
+
     self.touch_began_x = x
     self.touch_began_y = y
 
     -- 1010 模式
-    if game_matrix:inRect(x,y) then
+    if self.mMatrixNode:inRect(x,y) then
+
         self.delta_x = x - self.began_pos_x
         self.delta_y = y - self.began_pos_y
 
-        self.cur_matrix = game_matrix
-
-        self.cur_matrix:scale(1.0)
+        self.mMatrixNode:scale(1.0)
         
-        self.state = GAME_1010
+        self.fsm:HandleEvent("1010")
 
         self.game_box:cancelSelected()
 
-        print(1010)
-
-        audio.playSound("res/sound/push.wav", false)
 
     -- 否则是其他 模式 要确定模式
     else
         if self.game_box:inSelected(x,y) then
-            self.state = GAME_CRUSH
+            self.fsm:HandleEvent("crush")
         else
-            self.state = GAME_IDLE 
+            self.fsm:HandleEvent("three")
 
             self.game_box:cancelSelected()
         end
@@ -234,11 +234,11 @@ end
 
 
 function GameScene:onTouchMoved(x, y)
-    if self.state == GAME_1010 then
-
-        self.cur_matrix:pos(x - self.delta_x,y - self.delta_y)
+    QPrint(self.fsm.mCurState.mName)
+    if self.fsm.mCurState.mName == "1010" then
+        QPrint("1010 move")
+        self.mCurMatrix:pos(x - self.delta_x,y - self.delta_y)
         self.game_box:move1010(self.cur_matrix)
-
     elseif self.state == GAME_IDLE or self.state == GAME_CRUSH then
         self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
 
@@ -289,28 +289,28 @@ end
 function GameScene:crushMatrixObject()
     self.row_bricks = {}
     self.col_bricks = {}
-    for i=1,8 do
+    for i=1,ROW_COUNT do
         local tagRow = 0
         local tagCol = 0            
-        for j=1,8 do
+        for j=1,COL_COUNT do
             if self.game_box.base_data[j][i] == 3 then
                 tagRow = tagRow + 1
             end
         end
 
-        for j=1,8 do
+        for j=1,COL_COUNT do
             if self.game_box.base_data[i][j] == 3 then
                 tagCol = tagCol + 1
             end
         end
 
-        if tagRow == 8 then
+        if tagRow == ROW_COUNT then
             self.row_bricks[i] = 1
         else 
             self.row_bricks[i] = 0
         end 
 
-        if tagCol == 8 then
+        if tagCol == COL_COUNT then
             self.col_bricks[i] = 1
         else
             self.col_bricks[i] = 0
@@ -319,8 +319,8 @@ function GameScene:crushMatrixObject()
 
     local line_count = 0
 
-    for i=1,8 do
-        for j=1,8 do
+    for i=1,ROW_COUNT do
+        for j=1,COL_COUNT do
             if self.col_bricks[i] == 1 or self.row_bricks[j] == 1 then
                 local brick = self.game_box.items[i][j]
                 if brick then
@@ -350,17 +350,17 @@ function GameScene:onTouchEnded(x, y)
 
             audio.playSound("res/sound/push.wav", false)
         end
-        self.cur_matrix:pos(display.cx - 66 * 1.5,display.height - 66 * 5)
+        self.cur_matrix:pos(display.cx - ITEM_DISTANCE * 1.5,display.height - ITEM_DISTANCE * 5)
 
     if cc.PLATFORM_OS_IPAD == targetPlatform then
         self.cur_matrix:scale(0.5)
-        self.cur_matrix:pos(display.cx - 33 * 1.5,display.height - 33 * 5)
+        self.cur_matrix:pos(display.cx - ITEM_DISTANCE * 1.5,display.height - ITEM_DISTANCE * 5)
     end
         self.cur_matrix = nil
         self.state =GAME_IDLE 
     elseif self.state == GAME_THREE then
         self.state =GAME_IDLE 
-        if self.distance.x < -66 * 0.5 or self.distance.x > 66 * 0.5 or self.distance.y < -66 * 0.5 or self.distance.y > 66 * 0.5 then
+        if self.distance.x < -ITEM_DISTANCE * 0.5 or self.distance.x > ITEM_DISTANCE * 0.5 or self.distance.y < -ITEM_DISTANCE * 0.5 or self.distance.y > ITEM_DISTANCE * 0.5 then
 
             local temp = {}
 
@@ -384,9 +384,9 @@ function GameScene:onTouchEnded(x, y)
 
             local item = nil
 
-            for i=1,8 do
+            for i=1,ROW_COUNT do
 
-                for j=1,8 do
+                for j=1,COL_COUNT do
                     
                     item = self.game_box.items[i][j]
 
@@ -448,16 +448,16 @@ function GameScene:logic(dt)
         if not self.three_validated then
             self.three_validated = true
 
-            for i=1,8 do
-                for j=1,8 do
+            for i=1,ROW_COUNT do
+                for j=1,COL_COUNT do
                     self.temp_data[i][j] = self.game_box.base_data[i][j]
                 end
             end
 
             -- 四种方向 重复的代码太多
             if self.direction == DIRECTION_LEFT then
-                for y=1,8 do
-                    for x=2,8 do
+                for y=1,ROW_COUNT do
+                    for x=2,COL_COUNT do
                         local item = self.game_box.items[x][y]
                         if item then
 
@@ -508,8 +508,8 @@ function GameScene:logic(dt)
 
             elseif  self.direction == DIRECTION_RIGHT then
 
-                for y=1,8 do
-                    for x=7,1,-1 do
+                for y=1,COL_COUNT do
+                    for x=ROW_COUNT - 1,1,-1 do
 
                         local item = self.game_box.items[x][y]
 
@@ -561,8 +561,8 @@ function GameScene:logic(dt)
                     end
                 end
             elseif self.direction == DIRECTION_UP then
-                for x=1,8 do
-                    for y=7,1,-1 do
+                for x=1,ROW_COUNT do
+                    for y=COL_COUNT,1,-1 do
 
                         local item = self.game_box.items[x][y]
 
@@ -615,8 +615,8 @@ function GameScene:logic(dt)
                 end
 
             elseif self.direction == DIRECTION_DOWN then
-                for x=1,8 do
-                    for y=2,8 do
+                for x=1,ROW_COUNT do
+                    for y=2,COL_COUNT do
 
                         local item = self.game_box.items[x][y]
 
@@ -673,18 +673,18 @@ function GameScene:logic(dt)
 
             local a = self.game_box.base_data
 
-            for i=8,1,-1 do
+            for i=ROW_COUNT,1,-1 do
 
-                print(a[1][i],a[2][i],a[3][i],a[4][i],a[5][i],a[6][i],a[7][i],a[8][i])
+                print(a[1][i],a[2][i],a[3][i],a[4][i],a[5][i],a[6][i])
 
             end
 
 
             print("temp_data")
 
-            for i=8,1,-1 do
+            for i=COL_COUNT,1,-1 do
 
-                print(self.temp_data[1][i],self.temp_data[2][i],self.temp_data[3][i],self.temp_data[4][i],self.temp_data[5][i],self.temp_data[6][i],self.temp_data[7][i],self.temp_data[8][i])
+                print(self.temp_data[1][i],self.temp_data[2][i],self.temp_data[3][i],self.temp_data[4][i],self.temp_data[5][i],self.temp_data[6][i])
 
             end
 
@@ -694,8 +694,8 @@ function GameScene:logic(dt)
 
     if self.three_validated and self.direction ~= DIRECTION_NORMAL then
         local item = nil
-        for i=1,8 do
-            for j=1,8 do
+        for i=1,ROW_COUNT do
+            for j=1,COL_COUNT do
                 item = self.game_box.items[i][j]
                 if item then
                     item:moveThree(self.direction,self.distance)

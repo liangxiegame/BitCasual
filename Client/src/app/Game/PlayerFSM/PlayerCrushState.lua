@@ -1,8 +1,15 @@
 
-require("app.Game.PlayerFSM.PlayerState")
+local PlayerState = require("app.Game.PlayerFSM.PlayerState")
 
-PlayerCrushState = class("PlayerCrushState",PlayerState)
+local PlayerCrushState = class("PlayerCrushState",PlayerState)
 
+-- 消除 主要是点击
 function PlayerCrushState:OnEnter()
-	QPrint("player Crush state: on enter")
+	QPrint("Crush:OnEnter")
 end
+
+function PlayerCrushState:OnExit()
+	QPrint("Crush:OnExit")
+end
+
+return PlayerCrushState

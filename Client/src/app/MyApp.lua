@@ -11,6 +11,8 @@ require("app.utils.ImageUtil")
 require("app.utils.GUIUtil")
 require("app.utils.TableUtil")
 require("app.utils.QTimer")
+require("app.utils.NativeUtil")
+require("app.utils.DrawUtil")
 
 require("app.AppConstants")
 

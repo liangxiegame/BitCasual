@@ -8,6 +8,7 @@ function GameMatrix:ctor()
 	self:initData()
 
 	self:setupNodes()
+	-- self:setContentSize(cc.size(ITEM_DISTANCE * 4,ITEM_DISTANCE * 4))
 end
 
 function GameMatrix:initData()
@@ -22,10 +23,9 @@ function GameMatrix:initData()
 end
 
 function GameMatrix:setupNodes()
-   -- local drawNode4 = cc.NVGDrawNode:create()
-   -- self:addChild(drawNode4)
-   -- drawNode4:drawRect(cc.p(0,0), cc.p(ITEM_DISTANCE * 3,ITEM_DISTANCE * 3), cc.c4f(1, 0, 0, 1))
    
+   DrawUtil.DrawRect(self, cc.p(0,0), cc.p(ITEM_DISTANCE * 3,ITEM_DISTANCE * 3), cc.c4f(1, 0, 0, 1))
+
     for i=1,4 do
     	self.items[i] = {}
     	for j=1,4 do
@@ -83,6 +83,17 @@ function GameMatrix:refresh()
 	end
 end
 
+function GameMatrix:reset()
+	self:posCenter(display.cx * 1.5 , display.cy)
+	-- self:setAnchorPoint(cc.p())
+	-- self:scale(0.8)
+	return self
+end
+
+function GameMatrix:posCenter(x,y)
+	self:pos(-ITEM_DISTANCE * 1.5 + x,ITEM_DISTANCE * 1.5 + y)
+	return self 
+end
 
 function GameMatrix:genNewOne()
 	local kind = math.random(#matrices)

@@ -13,26 +13,6 @@ function HomeScene:ctor()
 end
 
 function HomeScene:initData()
-	-- MsgDispatcher.RegLogicMsg("setupnodes",self,self.setupNodes)
-        -- 测试一下状态机
-    require("app.Game.PlayerFSM.Player1010State")
-    require("app.Game.PlayerFSM.PlayerCrushState")
-    require("app.Game.PlayerFSM.PlayerIdleState")
-    require("app.Game.PlayerFSM.PlayerThreeState")
-
-    local fsm = FSM:new()
-
-    local state1010 = Player1010State:new("1010",self)
-    local stateCrush = PlayerCrushState:new("Crush",self)
-    local stateIdle = PlayerIdleState:new("Idle",self)
-    local stateThree = PlayerThreeState:new("Three",self)
-
-    fsm:AddState(state1010)
-    fsm:AddState(stateCrush)
-    fsm:AddState(stateIdle)
-    fsm:AddState(stateThree)
-
-    fsm:Start(state1010)
 
 end
 

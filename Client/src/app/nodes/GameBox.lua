@@ -25,23 +25,23 @@ function GameBox:ctor()
 
   self.base_data[0] = {}
 
-  self.base_data[9] = {}
+  self.base_data[6] = {}
 
-  	for i=1,8 do
+  	for i=1,ROW_COUNT do
       self.base_data[0][i] = -1
-      self.base_data[9][i] = -1
+      self.base_data[ROW_COUNT][i] = -1
       self.base_data[i] = {}
 
 
       self.base_data[i][0] = -1
-      self.base_data[i][9] = -1
+      self.base_data[i][COL_COUNT] = -1
   		self.rects[i] = {}
 
       self.items[i] = {}
   
       self.dst_items[i] = {}
 
-  		for j=1,8 do
+  		for j=1,COL_COUNT do
   			
   			-- 区域块
   			self.rects[i][j] = cc.rect((i - 1) * ITEM_DISTANCE ,(j - 1) * ITEM_DISTANCE,ITEM_DISTANCE,ITEM_DISTANCE)
@@ -62,39 +62,25 @@ function GameBox:ctor()
   		end
   	end
 	--设置所有子节点
-
-	-- local drawNode4 = cc.NVGDrawNode:create()
-
- --   	self:addChild(drawNode4)2
- --   	drawNode4:drawRect(cc.p(0,0), cc.p(ITEM_DISTANCE * 8,ITEM_DISTANCE * 8), cc.c4f(1, 0, 0, 1))
+  DrawUtil.DrawRect(self,cc.p(0,0), cc.p(ITEM_DISTANCE * ROW_COUNT,ITEM_DISTANCE * COL_COUNT), cc.c4f(1, 0, 0, 1))
 
 end
 
 function GameBox:inSelected(x,y)
-
   local node_pos_x = x - self:getPositionX()
-
   local node_pos_y = y - self:getPositionY()
 
   -- local bRet = false
-
   local index_x 
-
   local index_y
 
   for i,item in ipairs(self.selected_items) do
-
       index_x = item.index_x
-
       index_y = item.index_y
-
       if cc.rectContainsPoint(self.rects[index_x][index_y],cc.p(node_pos_x,node_pos_y)) then
-
           return true
-
       end
-
-    end
+  end
 
   return false
 
@@ -103,54 +89,33 @@ end
 function GameBox:ended(x,y)
   
   local node_pos_x = x - self:getPositionX()
-
   local node_pos_y = y - self:getPositionY()
 
   if self.first_touch == true then
 
-      for i=1,8 do
+      for i=1,ROW_COUNT do
 
-        for j=1,8 do
-          
-          
+        for j=1,COL_COUNT do
           if cc.rectContainsPoint(self.rects[i][j],cc.p(node_pos_x,node_pos_y)) then
-
             self:iter(i,j)
-
             break
-            
           end
-
         end
-
       end
 
       if table.nums(self.selected_items) <= 1 then
-        
         self:cancelSelected()
-
         print("began false")
-
         return false
-
       else
         print("began true")
-
         self.first_touch = false
-
         audio.playSound("res/sound/select.wav",false)
-
-
         return true
-
       end
-
   else
-
     local can_clear = self:inSelected(x, y)
-
     if can_clear == true then
-      
       self:getParent().time = self:getParent().time +  crushCountForTime(table.nums(self.selected_items))
 
       self:getParent():addCount(table.nums(self.selected_items))
@@ -304,29 +269,23 @@ end
 
 
 function GameBox:canPush(matrix,i,j)
-
   for x=1,4 do
     for y=1,4 do
-      
       if matrix.matrix_data[x][y] ~= 0 then
 
-        if x + i < 10 and y + j < 10 then
+        if x + i < ROW_COUNT + 2 and y + j < COL_COUNT + 2 then
           
             local sum = self.base_data[x + i - 1][y + j - 1] + matrix.matrix_data[x][y]
           
             local product = self.base_data[x + i - 1][y + j - 1] * matrix.matrix_data[x][y]
-
 
             if sum ~= 3 and product ~= 0 then
               
               return false
 
             end
-
         else
-
           return false
-
         end
 
       end
@@ -335,7 +294,6 @@ function GameBox:canPush(matrix,i,j)
   end
 
   return true
-
 end
 
 
@@ -345,67 +303,43 @@ function GameBox:willPush( matrix,i,j )
 
   for x=1,4 do
     for y=1,4 do
-      
       if matrix.matrix_data[x][y] ~= 0 then
-          
-            local sum = self.base_data[x + i - 1][y + j - 1] + matrix.matrix_data[x][y]
-          
-            local product = self.base_data[x + i - 1][y + j - 1] * matrix.matrix_data[x][y]
-
+        local sum = self.base_data[x + i - 1][y + j - 1] + matrix.matrix_data[x][y]
+          local product = self.base_data[x + i - 1][y + j - 1] * matrix.matrix_data[x][y]
             if sum == 3  then
-
               self.dst_items[i + x - 1][j + y - 1]:setKind(3)
               self.dst_items[i + x - 1][j + y - 1]:complete()
-
             else
-
               self.dst_items[i + x - 1][j + y - 1]:setKind(matrix.matrix_data[x][y])
               self.dst_items[i + x - 1][j + y - 1]:half()
               self.dst_items[i + x - 1][j + y - 1]:show()
-
-
             end
-
       end
-
     end
   end
-
-
 end
+
 -- 是否可以放置
 function GameBox:move1010(matrix)
-
   local pos_x = matrix:getPositionX()
-
   local pos_y = matrix:getPositionY()
-
   local node_pos_x = pos_x - self:getPositionX()
-
   local node_pos_y = pos_y - self:getPositionY()
 
-
-  for i=1,8 do
-
-    for j=1,8 do
-      
+  for i=1,ROW_COUNT do
+    for j=1,COL_COUNT do
       if cc.rectContainsPoint(self.rects[i][j],cc.p(node_pos_x,node_pos_y)) then
-
           local can_push = self:canPush(matrix,i,j)
-
           -- 可以全部放置
           if can_push then
-
             
            self:willPush(matrix,i,j)
 
             return 
           end
-
       end
     end
   end
-      -- self:hideDST()
 end
 
 
@@ -420,9 +354,9 @@ function GameBox:push( matrix )
 
   local node_pos_y = pos_y - self:getPositionY()
 
-  for i=1,8 do
+  for i=1,ROW_COUNT do
 
-    for j=1,8 do
+    for j=1,COL_COUNT do
       
       if cc.rectContainsPoint(self.rects[i][j],cc.p(node_pos_x,node_pos_y)) then
 
@@ -482,8 +416,8 @@ function GameBox:push( matrix )
 end
 
 function GameBox:hideDST()
-    for i=1,8 do
-      for j=1,8 do
+    for i=1,ROW_COUNT do
+      for j=1,COL_COUNT do
         self.dst_items[i][j]:hide()
 
         -- print(self.base_data[i][j])

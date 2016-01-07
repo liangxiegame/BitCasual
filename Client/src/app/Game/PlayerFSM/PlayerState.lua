@@ -1,9 +1,9 @@
 
-PlayerState = class("PlayerState",FSMState)
+local PlayerState = class("PlayerState",FSMState)
 
-function PlayerState:ctor(name,player)
+function PlayerState:ctor(name,scene)
 	FSMState.ctor(self,name)
-	self.mPlayer = player
+	self.mScene = scene
 end
 
 return PlayerState
