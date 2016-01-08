@@ -85,8 +85,7 @@ end
 
 function GameMatrix:reset()
 	self:posCenter(display.cx * 1.5 , display.cy)
-	-- self:setAnchorPoint(cc.p())
-	-- self:scale(0.8)
+	self:scale(0.5)
 	return self
 end
 

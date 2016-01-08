@@ -10,14 +10,14 @@ function Player1010State:OnEnter()
 	-- 播放声音
 	audio.playSound("res/sound/push.wav", false)
 
+    -- self.model.scene.matrixBeganPosX = self.model.scene.matrixNode:getPositionX()
+    -- self.model.scene.matrixBeganPosY = self.model.scene.matrixNode:getPositionY()
 
-    self.mScene.matrixBeganPosX = self.mScene.matrixNode:getPositionX()
-    self.mScene.matrixBeganPosY = self.mScene.matrixNode:getPositionY()
+    -- self.model.scene.deltaX = self.model.scene.touchBeganX - self.model.scene.matrixBeganPosX
+    -- self.model.scene.deltaY = self.model.scene.touchBeganY - self.model.scene.matrixBeganPosY
 
-    self.mScene.deltaX = self.mScene.touchBeganX - self.mScene.matrixBeganPosX
-    self.mScene.deltaY = self.mScene.touchBeganY - self.mScene.matrixBeganPosY
-
-    self.mScene.matrixNode:scale(1.0)
+    self.model.scene.matrixNode:scale(1.0)
+    -- self.model.scene.matrixNode:
 
 end
 

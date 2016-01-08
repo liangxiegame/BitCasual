@@ -16,19 +16,17 @@ function GameScene:ctor()
 
     self:initData() -- 初始化数据
     self:setupNodes() -- 设置所有子节点
-    -- self:registerEvent() -- 注册事件
+    self:registerEvent() -- 注册事件
 
     -- NativeUtil.PreloadFullAd() -- 预加载广告
 end
 
 -- 初始化模型数据 
 function GameScene:initData()
-
     -- 注册
-    app.gameModel.ctrl = self 
+    app.gameModel.scene = self 
 
     app.gameModel:initModel()
-
 end
 
 function GameScene:setupNodes()
@@ -58,75 +56,14 @@ function GameScene:setupNodes()
     local GameClock = require("app.nodes.GameClock")
 
     self.gameClock = GameClock.new()
+                :pos(display.cx * 0.6,display.cy * 1.5)
                 :addTo(self)
 
-    -- if true then return end 
-    -- -- 时间 to do 要改成QNumber
-    -- self.time_label = cc.Label:createWithSystemFont("60.00","Arial",40)
-    --                 :pos(display.cx * 1.5,display.height - 30)
-    --                 :addTo(self)
-    -- self.time = 10 
+    local ScoreLabel = require("app.nodes.ScoreLabel")
 
-    -- self.time_label:setColor(display.COLOR_BLACK)
-
-    -- -- 定时的东西 要分给定时器来
-    -- local speed = 0.05
-    -- local schedule_id
-    -- local last_int_part = 59
-    -- local cur_int_part = 60
-
-    -- local function tick()
-    --     speed = speed * 1.001
-    --     if speed >= 0.15 then
-    --         speed = 0.15
-    --     end
-
-    --     self.time = self.time - speed
-    --     local cur_int_part = math.modf(self.time)
-
-    --     if cur_int_part - last_int_part > 1.1 then
-    --         last_int_part = cur_int_part
-    --     end
-
-    --     if last_int_part > cur_int_part then
-    --         last_int_part = cur_int_part
-
-    --         audio.playSound("res/sound/tick.wav", false)
-    --     end
-
-    --     self.time_label:setString(string.format("%.2f", self.time))
-
-    --     if self.time <= 0.1 then
-    --         local high_score = cc.UserDefault:getInstance():getIntegerForKey("highscore")
-
-    --         if high_score ~= nil and self.count > high_score then
-    --             cc.UserDefault:getInstance():setIntegerForKey("highscore", self.count)
-    --         end
-
-    --         cc.UserDefault:getInstance():setIntegerForKey("score", self.count)
-    --         cc.UserDefault:getInstance():flush()
-
-    --         app:enterScene("GameOver")
-    --     end
-    -- end
-
-    -- schedule_id = self:schedule(tick, 0.1)
-
-    -- self.count_label = cc.Label:createWithSystemFont("score:0","Arial",40)
-    --                 :pos(display.cx * 0.5,display.height - 30)
-    --                 :addTo(self)
-
-    -- self.count_label:setColor(display.COLOR_BLACK)
-
-    -- self.count = 0
-end
-
-
--- 增加分数
-function GameScene:addCount(count)
-    self.count = self.count + count
-
-    self.count_label:setString(string.format("score:%d", self.count))
+    self.scoreLabel = ScoreLabel.new()
+                :pos(display.cx * 0.72,display.cy * 1.7)
+                :addTo(self)
 end
 
 -- 注册触摸事件
@@ -141,49 +78,42 @@ function GameScene:registerEvent()
             self:onTouchEnded(event.x, event.y)
         elseif event.name == "cancel" then
             self.gameBox:cancelSelected()
-            for i=1,8 do
-                for j=1,8 do
-                    item = self.gameBox.items[i][j]
-                    if item then
-                        item:moveBack()
-                    end        
-                end
-            end
+            -- for i=1,8 do
+            --     for j=1,8 do
+            --         item = self.gameBox.items[i][j]
+            --         if item then
+            --             item:moveBack()
+            --         end        
+            --     end
+            -- end
 
-            self.three_validated = false
+            -- self.three_validated = false
 
-            self.direction = DIRECTION_NORMAL
+            -- self.direction = DIRECTION_NORMAL
         end
-
-        return bRet
-
     end)
         
     self:setTouchSwallowEnabled(false) 
     self:setTouchEnabled(true)
-    self:schedule(self.logic, 1.0 / 60.0)
+    self:schedule(self.logic, 1.0 / 10.0)
 end
 
 function GameScene:onTouchBegan(x, y)
-    -- 获取初始坐标
-    self.began_pos_x = self.matrixNode:getPositionX()
-    self.began_pos_y = self.matrixNode:getPositionY()
-
     self.touchBeganX = x
     self.touchBeganY = y
     -- 1010 模式
     if self.matrixNode:inRect(x,y) then
         
-        self.fsm:HandleEvent("1010")
-
+        app.gameModel.fsm:HandleEvent("1010")
+        self.matrixNode:pos(x - ITEM_DISTANCE * 1.5,y - ITEM_DISTANCE * 0.5)
         self.gameBox:cancelSelected()
     -- 否则是其他 模式 要确定模式
     else
         if self.gameBox:inSelected(x,y) then
 
-            self.fsm:HandleEvent("crush")
+            app.gameModel.fsm:HandleEvent("crush")
         else
-            self.fsm:HandleEvent("three")
+            app.gameModel.fsm:HandleEvent("three")
 
             self.gameBox:cancelSelected()
         end
@@ -195,12 +125,11 @@ end
 
 function GameScene:onTouchMoved(x, y)
 
-    if self.fsm.mCurState.mName == "1010" then
-
-        self.matrixNode:pos(x - self.deltaX,y - self.deltaY)
+    if app.gameModel.fsm.mCurState.mName == "1010" then
+        self.matrixNode:pos(x - ITEM_DISTANCE * 1.5,y - ITEM_DISTANCE * 0.5)
         self.gameBox:move1010(self.matrixNode)
 
-    elseif self.fsm.mCurState.mName == "idle" or self.fsm.mCurState.mName == "crush" then
+    elseif self.model.fsm.mCurState.mName == "idle" or self.model.fsm.mCurState.mName == "crush" then
 
         self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
 
@@ -295,35 +224,36 @@ function GameScene:crushMatrixObject()
         end
     end
 
-    self.time = self.time + lineCountForTime(line_count)
-    self:addCount(line_count * 10)
-    self.row_bricks = {}
-    self.col_bricks = {}
+    if lineCountForTime(line_count) ~= 0 then 
+        self.gameClock.number:AddNumber(10 - self.gameClock.number:getNumber())
+    end 
+
+    self.scoreLabel.number:AddNumber(line_count * 10)
 
     if line_count ~= 0 then
+        self.gameClock:ResetTime()
         audio.playSound("res/sound/crushline.wav", false)
     end
 end
 
 function GameScene:onTouchEnded(x, y)
 
-    if self.fsm.mCurState.mName == "1010" then
+    if app.gameModel.fsm.mCurState.mName == "1010" then
 
         if self.gameBox:push(self.matrixNode) then
 
             self.matrixNode:genNewOne()
-
             audio.playSound("res/sound/push.wav", false)
         end
 
-        self.matrixNode:pos(display.cx - ITEM_DISTANCE * 1.5,display.height - ITEM_DISTANCE * 5)
+        self.matrixNode:reset()
 
     -- if cc.PLATFORM_OS_IPAD == targetPlatform then
     --     self.cur_matrix:scale(0.5)
     --     self.cur_matrix:pos(display.cx - ITEM_DISTANCE * 1.5,display.height - ITEM_DISTANCE * 5)
     -- end        
 
-        self.fsm:HandleEvent("idle")
+        app.gameModel.fsm:HandleEvent("idle")
 
     elseif self.state == GAME_THREE then
         self.state =GAME_IDLE 

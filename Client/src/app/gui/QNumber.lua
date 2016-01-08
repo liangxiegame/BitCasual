@@ -32,40 +32,8 @@ function QNumber:setNumber(num)
     local numArray = QMathUtil.ArrayForNumber(num)
     
     self.frameSize = display.newSprite(display.newSpriteFrame("2.png")):getContentSize()
-    QPrint("frame width",self.frameSize.width)
-    --左对齐
-    if self.align == "left" then
-        for i = 1,#numArray do
 
-            local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(self.frameSize.width  * nums[i],0,self.frameSize.width / 10.0,self.frameSize.height))
-
-            self.numSprites[i] = cc.Sprite:createWithSpriteFrame(spFrame)
-                :pos((nums.count - i)  * size.width / 10 * self.space,0)
-                :addTo(self) 
-
-            self.numSprites[i].num = nums[i] 
-        end
-
-    --居中
-    elseif self.align == "center" then
-        QPrint(#numArray,"numArray")
-        local initPosX = (#numArray - 1) / 2
-        for i = 1,#numArray do
-
-            if self.numSprites[i] then 
-                self.numSprites[i]:setSpriteFrame(display.newSpriteFrame(""..numArray[i]..".png"))
-                self.numSprites[i]:pos((initPosX - i + 1) * self.frameSize.width  * self.space,0)
-            else 
-                self.numSprites[i] = display.newSprite(display.newSpriteFrame(""..numArray[i]..".png"),(initPosX - i + 1) * self.frameSize.width  * self.space,0)
-                :addTo(self)
-            end 
-
-            self.numSprites[i].num = numArray[i]
-        end
-    end
-
-    -- self:setFrames(QMathUtil.ArrayForNumber())
-    -- self:setFrames(numArray)
+    self:setFrames(numArray)
 end
 
 --处理后显示数字 没有变数过程
@@ -173,27 +141,23 @@ function QNumber:setFrames(numArray)
 
     --左对齐
     if self.align == "left" then
-        for i = 1,7 do
+        for i = 1,#numArray do
             
-            local tempNum 
-            if nums[i] == nil then
-                tempNum = 0
+            if self.numSprites[i] then 
+                self.numSprites[i]:setSpriteFrame(display.newSpriteFrame(""..numArray[i]..".png"))
+                self.numSprites[i]:pos((#numArray - i)  * self.frameSize.width  * self.space,0)
             else 
-                tempNum = nums[i]
-            end
-            
-            local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(size.width / 10.0 * tempNum,0,size.width / 10.0,size.height))
+                self.numSprites[i] = display.newSprite(display.newSpriteFrame(""..numArray[i]..".png"),(#numArray - i)  * self.frameSize.width  * self.space,0)
+                :addTo(self)
+            end 
 
-            self.numSprites[i]:setSpriteFrame(spFrame)
-                :pos((nums.count - i)  * size.width / 10.0 * self.space,0)
+            self.numSprites[i].num = numArray[i] 
                 
-            self.numSprites[i].num = tempNum
         end
         --居中
     elseif self.align == "center" then
         local initPosX = (#numArray - 1) / 2
         for i = 1,#numArray do
-
 
             if self.numSprites[i] then 
                 self.numSprites[i]:setSpriteFrame(display.newSpriteFrame(""..numArray[i]..".png"))
@@ -207,31 +171,14 @@ function QNumber:setFrames(numArray)
         end
     end
     
-    local tempIndex
-
-    local hideZero = false
-
-    for i = 1, 6 do
-
-        tempIndex = 8 - i 
-
-        if self.numSprites[tempIndex] == nil then
-        
-        elseif self.numSprites[tempIndex].num == nil then
-
-            self.numSprites[tempIndex]:hide()
-
-        elseif self.numSprites[tempIndex].num == 0 then
-            if hideZero == false then
-                self.numSprites[tempIndex]:hide()
-            else 
-                self.numSprites[tempIndex]:show()
-            end
+    -- 要比较
+    for i = 1,#self.numSprites do 
+        if numArray[i] == self.numSprites[i].num then 
+            self.numSprites[i]:show()
         else 
-            hideZero = true
-            self.numSprites[tempIndex]:show()
+            self.numSprites[i]:hide()
         end 
-    end
+    end 
 end
 
 return QNumber

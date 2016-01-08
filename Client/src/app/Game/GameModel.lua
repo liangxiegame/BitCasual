@@ -1,4 +1,4 @@
-local GameModel = class("GameModel")
+local GameModel = class("GameModel",cc.mvc.ModelBase)
 
 -- @private
 -- 游戏的数据和状态管理 应该是个单例 
@@ -60,7 +60,8 @@ function GameModel:initModel()
 
     -- 临时存储的数据
     self.tempBoxData = BoxData.new()
-    -- self.tempBoxData:initTable()
+
+
 end
 
 return GameModel
