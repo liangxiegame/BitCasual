@@ -2,117 +2,79 @@ local QNumber = class("QNumber",function (  )
 	return display.newNode()
 end)
 
+-- 这次是使用纹理实现数字精灵
 function QNumber:ctor()
-	self.sprites = {}
+	self.numSprites = {}
 end
 
+--@public
+-- 作为Lable的基本设置
 function QNumber:setSpace( space ) self.space = space end
 function QNumber:setAlign( align ) self.align = align end
-
 function QNumber:setType(name )
 	local tc = cc.Director:getInstance():getTextureCache()
 
 	if name == "normal" then 
-		imageName = ""
+		imagePrefix = ""
 	else 
 		QPrint("no image name called:",name)
 		return 
 	end 
-
-	-- 通过image获取图片,加载到纹理缓存中,并命名
-	local image = cc.Image:new()
-
-	image:initWithImageFile(imageName)
-
-	tc:addImage(image, name)
-
 	self.name = name
+    self.mImagePrefix = ""
 end
 
--- 处理数字的位数 
-local function handleNum( num )
-	-- 存储美味数字的数组
-	local numArray = {}
-
-	-- 用来计算的下角标
-	local flag = 0
-
-	-- 临时的
-	local tempNum = num 
-	local eLoop = true 
-	while eloop do
-		--移动下角标
-		flag = flag + 1
-
-		--获取第flag位的数字
-		numArray[flag] = math.modf(tempNum % 10)
-
-		-- 删除第flag位的数字
-		tempNum = tempNum / 10
-
-		if tempNum - 0 < 1 then 
-			eLoop = false
-		end 
-		-- 移动下角标
-	end
-
-	numArray.count = flag 
-
-	return numArray
-end
-
+-- @public 
+-- 设置数字
 function QNumber:setNumber(num)
-    self.currentNum = num
+    self.curNum = num
     --数字转换为数组
-    local nums = handleNum(num)
+    local numArray = QMathUtil.ArrayForNumber(num)
     
-    --获取纹理
-    local tc = cc.Director:getInstance():getTextureCache()
-    local texture = tc:getTextureForKey(self.name)
-    local size = texture:getContentSize()
-    
+    self.frameSize = display.newSprite(display.newSpriteFrame("2.png")):getContentSize()
+    QPrint("frame width",self.frameSize.width)
     --左对齐
     if self.align == "left" then
-        for i = 1,7 do
-            
-            if nums[i] == nil then
-                nums[i] = 0
-            end            
+        for i = 1,#numArray do
 
-            local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(size.width / 10.0 * nums[i],0,size.width / 10.0,size.height))
-            self.sprites[i] = cc.Sprite:createWithSpriteFrame(spFrame)
+            local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(self.frameSize.width  * nums[i],0,self.frameSize.width / 10.0,self.frameSize.height))
+
+            self.numSprites[i] = cc.Sprite:createWithSpriteFrame(spFrame)
                 :pos((nums.count - i)  * size.width / 10 * self.space,0)
-                :addTo(self)   
-            self.sprites[i].num = nums[i] 
+                :addTo(self) 
+
+            self.numSprites[i].num = nums[i] 
         end
 
     --居中
     elseif self.align == "center" then
-        local initPosX = (nums.count - 1) / 2
-        for i = 1,7 do
-            if nums[i] == nil then
-                nums[i] = 0
-            end
+        QPrint(#numArray,"numArray")
+        local initPosX = (#numArray - 1) / 2
+        for i = 1,#numArray do
 
-            local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(size.width / 10.0 * nums[i],0,size.width / 10.0,size.height))
-
-            self.sprites[i] = cc.Sprite:createWithSpriteFrame(spFrame)
-                :pos((initPosX - i + 1) * size.width / 10.0 * self.space,0)
+            if self.numSprites[i] then 
+                self.numSprites[i]:setSpriteFrame(display.newSpriteFrame(""..numArray[i]..".png"))
+                self.numSprites[i]:pos((initPosX - i + 1) * self.frameSize.width  * self.space,0)
+            else 
+                self.numSprites[i] = display.newSprite(display.newSpriteFrame(""..numArray[i]..".png"),(initPosX - i + 1) * self.frameSize.width  * self.space,0)
                 :addTo(self)
-            self.sprites[i].num = nums[i]
+            end 
+
+            self.numSprites[i].num = numArray[i]
         end
     end
 
-    self:changeTextures(handleNum(self.currentNum))
+    -- self:setFrames(QMathUtil.ArrayForNumber())
+    -- self:setFrames(numArray)
 end
 
 --处理后显示数字 没有变数过程
 function QNumber:replaceNumber(num)
-    self:changeTextures(handleNum(num))
+    self:setFrames(QMathUtil.ArrayForNumber(num))
 end
 
 --更改数字
-function QNumber:changeNumber(num)
+function QNumber:AddNumber(num)
     
     local isAdd
 
@@ -153,30 +115,30 @@ function QNumber:changeNumber(num)
         duration = math.modf(distance / times)
         
     else
-        if num + self.currentNum < 0 then
+        if num + self.curNum < 0 then
             return false
         end
         --获取当前的数字
-        self.tempNumber = self.currentNum
+        self.tempNumber = self.curNum
         --将要变成的数字
-        self.becomeNumber = num + self.currentNum
+        self.becomeNumber = num + self.curNum
         --间隔
         duration = math.modf(num / times)
     end
    
     
-    self.numsArray = handleNum(self.becomeNumber)
+    self.numsArray = QMathUtil.ArrayForNumber(self.becomeNumber)
     
     local function counter(dt)
         self.tempNumber = self.tempNumber + duration
-        local nums = handleNum(self.tempNumber)
---        print(self.tempNumber)
+        local nums = QMathUtil.ArrayForNumber(self.tempNumber)
+--        QPrint(self.tempNumber)
         
         if isAdd == true and self.tempNumber + duration > self.becomeNumber then
             self:unscheduleUpdate()                  -- 取消定时器
-            print(self.becomeNumber)
-            self.currentNum = self.becomeNumber 
-            self:changeTextures(handleNum(self.becomeNumber ))
+            QPrint(self.becomeNumber)
+            self.curNum = self.becomeNumber 
+            self:setFrames(QMathUtil.ArrayForNumber(self.becomeNumber ))
             
             if self.func then
                 self.func()
@@ -187,10 +149,10 @@ function QNumber:changeNumber(num)
         
         if isAdd == false and self.tempNumber + duration < self.becomeNumber then
             self:unscheduleUpdate()                  -- 取消定时器
-            print(self.tempNumber)
-            print(self.becomeNumber)
-            self.currentNum = self.becomeNumber 
-            self:changeTextures(handleNum(self.becomeNumber ))
+            QPrint(self.tempNumber)
+            QPrint(self.becomeNumber)
+            self.curNum = self.becomeNumber 
+            self:setFrames(QMathUtil.ArrayForNumber(self.becomeNumber ))
             
             if self.func then
                 self.func()
@@ -198,7 +160,7 @@ function QNumber:changeNumber(num)
             
             return
         end
-        self:changeTextures(nums)
+        self:setFrames(nums)
     end
     self:scheduleUpdateWithPriorityLua(counter,0)
     self.isScheduleUpdate = true
@@ -206,11 +168,8 @@ function QNumber:changeNumber(num)
     return true
 end
 
-function QNumber:changeTextures(nums)
+function QNumber:setFrames(numArray)
     --获取纹理
-    local tc = cc.Director:getInstance():getTextureCache()
-    local texture = tc:getTextureForKey(self.name)
-    local size = texture:getContentSize()
 
     --左对齐
     if self.align == "left" then
@@ -225,28 +184,26 @@ function QNumber:changeTextures(nums)
             
             local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(size.width / 10.0 * tempNum,0,size.width / 10.0,size.height))
 
-            self.sprites[i]:setSpriteFrame(spFrame)
+            self.numSprites[i]:setSpriteFrame(spFrame)
                 :pos((nums.count - i)  * size.width / 10.0 * self.space,0)
                 
-            self.sprites[i].num = tempNum
+            self.numSprites[i].num = tempNum
         end
         --居中
     elseif self.align == "center" then
-        local initPosX = (nums.count - 1) / 2
-        for i = 1,7 do
-            local tempNum
-            
-            if nums[i] == nil then
-                tempNum = 0
-            else
-                tempNum = nums[i]
-            end
-            
-            local spFrame = cc.SpriteFrame:createWithTexture(texture,cc.rect(size.width / 10.0 * tempNum,0,size.width / 10.0,size.height))
+        local initPosX = (#numArray - 1) / 2
+        for i = 1,#numArray do
 
-            self.sprites[i]:setSpriteFrame(spFrame)
-                :pos((initPosX - i + 1) * size.width / 10.0 * self.space,0)
-            self.sprites[i].num = tempNum
+
+            if self.numSprites[i] then 
+                self.numSprites[i]:setSpriteFrame(display.newSpriteFrame(""..numArray[i]..".png"))
+                self.numSprites[i]:pos((initPosX - i + 1) * self.frameSize.width  * self.space,0)
+            else 
+                self.numSprites[i] = display.newSprite(display.newSpriteFrame(""..numArray[i]..".png"),(initPosX - i + 1) * self.frameSize.width  * self.space,0)
+                    :addTo(self)
+            end 
+
+            self.numSprites[i].num = numArray[i] + 0
         end
     end
     
@@ -258,25 +215,23 @@ function QNumber:changeTextures(nums)
 
         tempIndex = 8 - i 
 
-        if self.sprites[tempIndex] == nil then
+        if self.numSprites[tempIndex] == nil then
         
-        elseif self.sprites[tempIndex].num == nil then
+        elseif self.numSprites[tempIndex].num == nil then
 
-            self.sprites[tempIndex]:setVisible(false)
+            self.numSprites[tempIndex]:hide()
 
-        elseif self.sprites[tempIndex].num == 0 then
+        elseif self.numSprites[tempIndex].num == 0 then
             if hideZero == false then
-                self.sprites[tempIndex]:setVisible(false)
+                self.numSprites[tempIndex]:hide()
             else 
-                self.sprites[tempIndex]:setVisible(true)
+                self.numSprites[tempIndex]:show()
             end
         else 
             hideZero = true
-            self.sprites[tempIndex]:setVisible(true)
+            self.numSprites[tempIndex]:show()
         end 
     end
 end
-
-
 
 return QNumber

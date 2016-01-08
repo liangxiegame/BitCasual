@@ -4,6 +4,7 @@
 
 NativeUtil = {}
 
+local targetPlatform = cc.Application:getInstance():getTargetPlatform()
 
 function NativeUtil.PreloadFullAd()
 	

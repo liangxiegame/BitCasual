@@ -56,3 +56,35 @@ function QMathUtil:inShape(vectors,point,num)
 		return false
 	end
 end
+
+
+-- 数字转换为数组
+function QMathUtil.ArrayForNumber(num)
+	-- 存储美味数字的数组
+	local numArray = {}
+	QPrint("num",num)
+	-- 用来计算的下角标
+	local flag = 0
+
+	-- 临时的
+	local tempNum = num
+
+	local eLoop = true 
+	while eLoop do
+		--移动下角标
+		flag = flag + 1
+
+		--获取第flag位的数字
+		numArray[flag] = math.modf(tempNum % 10)
+		QPrint(numArray[flag])
+		-- 删除第flag位的数字
+		tempNum = tempNum / 10
+
+		if tempNum - 0 < 1 then 
+			eLoop = false
+		end 
+		-- 移动下角标
+	end
+
+	return numArray
+end

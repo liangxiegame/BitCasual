@@ -47,7 +47,7 @@ end
 function HomeScene:onEnter()
 	-- MsgDispatcher.SendLogicMsg("sutupnodes") -- 消息机制
     -- 应该有个Controller层
-	-- app:enterScene("GameScene")
+	app:enterScene("GameScene")
 end
 
 function HomeScene:onExit()

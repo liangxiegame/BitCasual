@@ -13,6 +13,7 @@ require("app.utils.TableUtil")
 require("app.utils.QTimer")
 require("app.utils.NativeUtil")
 require("app.utils.DrawUtil")
+require("app.utils.QMathUtil")
 
 require("app.AppConstants")
 
@@ -46,6 +47,12 @@ function MyApp:run()
 			cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT, cc.ResolutionPolicy.FIXED_WIDTH)
 		end
 	end
+
+    -- 先初始化游戏的状态
+    local GameModel = require("app.Game.GameModel")
+
+    GameModel.new()
+
     self:enterScene("HomeScene")
 end
 

@@ -1,11 +1,11 @@
 GUIUtil = {}
 
-local QNumebr = require("app.gui.QNumber")
+local QNumber = require("app.gui.QNumber")
 
 function GUIUtil.number(align,type,num,posX,posY,space )
 
 	if space == nil then space = 1 end 
-	local number = QNumber:new()
+	local number = QNumber.new()
 	number:setAlign(align)
 	number:setType(type)
 	number:setSpace(space)
@@ -15,6 +15,10 @@ function GUIUtil.number(align,type,num,posX,posY,space )
 	return number
 end
 
+--[[
+	@target 可以是Sprite
+	
+]]
 function GUIUtil.button(target,self,end_callback)
 	local move_count = 0
 
