@@ -34,6 +34,7 @@ function GameBox:initData()
   for rowIndex = 1,ROW_COUNT do 
     self.rects[rowIndex] = {}
     self.hitItems[rowIndex] = {}
+    self.gameItems[rowIndex] = {}
 
     for colIndex = 1,COL_COUNT do 
 
@@ -114,17 +115,14 @@ function GameBox:crush(x,y)
       item:setSelected(false)
       self.boxData[item.index_x][item.index_y] = 0
 
-      table.removebyvalue(self.gameItems , item, true)
+      self.gameItems[item.index_x][item.index_y] = nil
 
-      item:hide()
-      item:stopAllActions()
-      item:rotation(0)
-
+      item:removeFromParent()
       audio.playSound("res/sound/crush.wav",false)
 
     end
 
-    self:getParent().gameClock.number:AddNumber(20 - self:getParent().gameClock.number:getNumber())
+    self:getParent().gameClock.number:AddNumber(10 - self:getParent().gameClock.number:getNumber())
 
     self:getParent().scoreLabel:AddScore((#self.selectedItems - 2) * 2 + 2)
 
@@ -143,7 +141,7 @@ end
 --  递归
 function GameBox:iter(i,j)
 
-  local obj = self.hitItems[i][j]
+  local obj = self.gameItems[i][j]
 
   if obj ~= nil and not obj.selected and obj.kind == CHILD then
 
@@ -216,20 +214,12 @@ end
 
 function GameBox:cancelSelected()
 
-    for i,item in ipairs(self.selectedItems) do
-    
-      -- item.selected = false
-
-      item:setSelected(false)
-
+    for i = 1,#self.selectedItems do 
+      self.selectedItems[i]:setSelected(false)
       self.selectedItems[i] = nil
-
-    end
+    end 
 
     self.selectedItems = {}
-
-    self.first_touch = true
-
 end
 
 
@@ -261,15 +251,17 @@ function GameBox:willPush( matrix,i,j )
     for y=1,4 do
       if matrix.matrix_data[x][y] ~= 0 then
         local sum = self.boxData[x + i - 1][y + j - 1] + matrix.matrix_data[x][y]
-          local product = self.boxData[x + i - 1][y + j - 1] * matrix.matrix_data[x][y]
-            if sum == 3  then
-              self.hitItems[i + x - 1][j + y - 1]:setKind(3)
-              self.hitItems[i + x - 1][j + y - 1]:complete()
-            else
-              self.hitItems[i + x - 1][j + y - 1]:setKind(matrix.matrix_data[x][y])
-              self.hitItems[i + x - 1][j + y - 1]:half()
-              self.hitItems[i + x - 1][j + y - 1]:show()
-            end
+        local product = self.boxData[x + i - 1][y + j - 1] * matrix.matrix_data[x][y]
+        if sum == 3  then
+          self.hitItems[i + x - 1][j + y - 1]:setKind(3)
+          self.hitItems[i + x - 1][j + y - 1]:complete()
+          self.hitItems[i + x - 1][j + y - 1]:show()
+          self.gameItems[i + x - 1][j + y - 1]:hide()
+        else
+          self.hitItems[i + x - 1][j + y - 1]:setKind(matrix.matrix_data[x][y])
+          self.hitItems[i + x - 1][j + y - 1]:half()
+          self.hitItems[i + x - 1][j + y - 1]:show()
+        end
       end
     end
   end
@@ -285,9 +277,8 @@ function GameBox:move1010(matrix)
   for i=1,ROW_COUNT do
     for j=1,COL_COUNT do
       if cc.rectContainsPoint(self.rects[i][j],cc.p(nodePosX,nodePosY)) then
-          local can_push = self:canPush(matrix,i,j)
           -- 可以全部放置
-          if can_push then
+          if self:canPush(matrix,i,j) then
             
             self:willPush(matrix,i,j)
             return 
@@ -321,23 +312,28 @@ function GameBox:push( matrix )
 
                         if sum == 3  then
 
-                            self.hitItems[x + i - 1][y + j - 1]:setKind(3)
-
+                            self.gameItems[x + i - 1][y + j - 1]:setKind(3)
                             self.boxData[x + i - 1][y + j - 1] = 3
 
                         else
                             self.hitItems[x + i - 1][y + j - 1]:setIndex(x + i - 1,y + j - 1)
                             self.hitItems[x + i - 1][y + j - 1]:setKind(matrix.matrix_data[x][y])
+                            self.boxData[x + i - 1][y + j - 1] = matrix.matrix_data[x][y]
+
+                            local item = GameItem.new()
+                                          :pos((i + x - 1- 0.5) * ITEM_DISTANCE ,(j  + y - 1 - 0.5) * ITEM_DISTANCE)
+                                          :addTo(self)
+
+                            item:setIndex(x + i - 1,y + j - 1)
+                            item:setKind(matrix.matrix_data[x][y])
+
+                            self.gameItems[x + i - 1][y + j - 1] = item
                             
                             self.boxData[x + i - 1][y + j - 1] = matrix.matrix_data[x][y]
-                            self.gameItems[#self.gameItems + 1] = self.hitItems[x + i - 1][y + j - 1]
  
                         end
-
                      end                    
-
                   end
-
                 end
 
               self:hideDST()
@@ -356,16 +352,12 @@ end
 function GameBox:hideDST()
     for i=1,ROW_COUNT do
       for j=1,COL_COUNT do
-        self.hitItems[i][j]:hide()
-        self.hitItems[i][j]:setKind(self.boxData[i][j])
+          self.hitItems[i][j]:hide()
+          if self.gameItems[i][j] then 
+            self.gameItems[i][j]:show()
+          end 
       end
     end
-
-    for i = 1,#self.gameItems do 
-      self.gameItems[i]:complete()
-
-      self.gameItems[i]:show()
-    end 
 end
 
 return GameBox

@@ -9,6 +9,18 @@ end
 
 function PlayerThreeState:OnExit()
 	QPrint("Three:onExit")
+	        for i=1,ROW_COUNT do
+                for j=1,COL_COUNT do
+                    item = app.gameModel.scene.gameBox.gameItems[i][j]
+                    if item then
+                        item:moveBack()
+                    end        
+                end
+            end
+
+            app.gameModel.scene.threeValidated = false
+
+            app.gameModel.scene.direction = DIRECTION_IDLE
 end
 
 

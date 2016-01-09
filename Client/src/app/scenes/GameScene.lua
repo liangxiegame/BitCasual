@@ -27,6 +27,23 @@ function GameScene:initData()
     app.gameModel.scene = self 
 
     app.gameModel:initModel()
+
+        -- 这个忘了有没有用
+    self.touchID = -1
+    self.objectCount = 0
+
+    -- 设置方向
+    self.direction = DIRECTION_IDLE
+
+    -- 是否已经验证
+    self.threeValidated = false 
+
+    local BoxData = require("app.Game.BoxData")
+
+    -- 临时存储的数据
+    self.tempBoxData = BoxData.new()
+
+    self.removeItems = {}
 end
 
 function GameScene:setupNodes()
@@ -78,24 +95,13 @@ function GameScene:registerEvent()
             self:onTouchEnded(event.x, event.y)
         elseif event.name == "cancel" then
             self.gameBox:cancelSelected()
-            -- for i=1,8 do
-            --     for j=1,8 do
-            --         item = self.gameBox.items[i][j]
-            --         if item then
-            --             item:moveBack()
-            --         end        
-            --     end
-            -- end
 
-            -- self.three_validated = false
-
-            -- self.direction = DIRECTION_NORMAL
         end
     end)
         
     self:setTouchSwallowEnabled(false) 
     self:setTouchEnabled(true)
-    self:schedule(self.logic, 1.0 / 10.0)
+    self:schedule(self.logic, 1.0 / 30.0)
 end
 
 function GameScene:onTouchBegan(x, y)
@@ -109,7 +115,7 @@ function GameScene:onTouchBegan(x, y)
         self.gameBox:cancelSelected()
 
     -- 第二次的时候 优先级比较高一些
-    elseif self.gameBox:inSelectedItems(x,y)  then 
+    -- elseif self.gameBox:inSelectedItems(x,y)  then 
 
         -- app.gameModel.fsm:HandleEvent("crush")
 
@@ -137,52 +143,32 @@ function GameScene:onTouchMoved(x, y)
         self.matrixNode:pos(x - ITEM_DISTANCE * 1.5,y - ITEM_DISTANCE * 0.5)
         self.gameBox:move1010(self.matrixNode)
 
-    -- elseif self.model.fsm.mCurState.mName == "idle" or self.model.fsm.mCurState.mName == "crush" then
+    elseif app.gameModel.fsm.mCurState.mName == "idle" or app.gameModel.fsm.mCurState.mName == "crush" then
+        QPrint("move")
+        self.distance = cc.p(x - self.touchBeganX,y - self.touchBeganY)
 
-    --     self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
+        if self.direction == DIRECTION_IDLE and cc.pGetDistance(cc.p(x ,y), cc.p(self.touchBeganX, self.touchBeganY)) > 5 then
 
-    --     if self.direction == DIRECTION_NORMAL and cc.pGetDistance(cc.p(x ,y), cc.p(self.touchBeganX, self.touchBeganY)) > 5 then
+            if self.distance.x > math.abs(self.distance.y) then
+                self.direction = DIRECTION_RIGHT
+            end
+            if -self.distance.x > math.abs(self.distance.y) then
+                self.direction = DIRECTION_LEFT
+            end
+            if self.distance.y > math.abs(self.distance.x) then
+                self.direction = DIRECTION_UP
+            end
+            if -self.distance.y > math.abs(self.distance.x) then
+                self.direction = DIRECTION_DOWN
+            end
 
-    --         self.model.fsm:HandleEvent("three")
-
-    --         local dist_x = x - self.touch_began_x
-    --         local dist_y = y - self.touch_began_y
-
-    --         if dist_x > math.abs(dist_y) then
-    --             print("right")
-
-    --             self.direction = DIRECTION_RIGHT
-    --         end
-
-    --         if -dist_x > math.abs(dist_y) then
-
-    --             print("left")
-
-    --             self.direction = DIRECTION_LEFT
-
-    --         end
-
-    --         if dist_y > math.abs(dist_x) then
-
-    --             print("up")
-
-    --             self.direction = DIRECTION_UP
-
-    --         end
-
-    --         if -dist_y > math.abs(dist_x) then
-
-    --             print("down")
-
-    --             self.direction = DIRECTION_DOWN
-    --         end
-
-    --         self.gameBox:cancelSelected()
-    --     end
+            self.gameBox:cancelSelected()
+            app.gameModel.fsm:HandleEvent("three")
+        end
 
     -- -- 在滑动的时候能确定是 小三模式
-    -- elseif self.state ==  GAME_THREE then
-    --     self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
+    elseif app.gameModel.fsm.mCurState.mName == "three" then
+        self.distance = cc.p(x - self.touchBeganX,y - self.touchBeganY)
     end
 end
 
@@ -200,74 +186,74 @@ function GameScene:onTouchEnded(x, y)
         self.matrixNode:reset() -- 初始化
         app.gameModel.fsm:HandleEvent("idle")
 
-    -- elseif self.state == GAME_THREE then
-    --     self.state =GAME_IDLE 
-    --     if self.distance.x < -ITEM_DISTANCE * 0.5 or self.distance.x > ITEM_DISTANCE * 0.5 or self.distance.y < -ITEM_DISTANCE * 0.5 or self.distance.y > ITEM_DISTANCE * 0.5 then
+    elseif app.gameModel.fsm.mCurState.mName == "three" then
+        if self.distance.x < -ITEM_DISTANCE * 0.5 or self.distance.x > ITEM_DISTANCE * 0.5 or self.distance.y < -ITEM_DISTANCE * 0.5 or self.distance.y > ITEM_DISTANCE * 0.5 then
 
-    --         local temp = {}
+            local temp = {}
 
-    --         -- 删除掉
-    --         local index_x = 0
-    --         local index_y = 0
-    --         local item = nil
+            -- 删除掉
+            local index_x = 0
+            local index_y = 0
+            local item = nil
 
-    --         for i=1,table.nums(self.remove_items) do
-    --             item = self.remove_items[i]
-    --             index_x = item.index_x
-    --             index_y = item.index_y
+            for i=1,#self.removeItems do
+                item = self.removeItems[i]
+                index_x = item.index_x
+                index_y = item.index_y
 
-    --             item:removeFromParent()
-    --             self.remove_items[i] = nil
+                item:removeFromParent()
+                self.removeItems[i] = nil
 
-    --             self.gameBox.items[index_x][index_y] = nil
-    --         end
+                self.gameBox.gameItems[index_x][index_y] = nil
+            end
 
-    --         self.remove_items = {}
+            self.removeItems = {}
 
-    --         local item = nil
+            local item = nil
 
-    --         for i=1,ROW_COUNT do
+            for i=1,ROW_COUNT do
 
-    --             for j=1,COL_COUNT do
+                for j=1,COL_COUNT do
                     
-    --                 item = self.gameBox.items[i][j]
+                    item = self.gameBox.gameItems[i][j]
 
-    --                 if item then
+                    if item then
                         
-    --                     item:step(self.direction)  
+                        item:step(self.direction)  
 
-    --                     TableUtil:push(temp, item)
+                        TableUtil:push(temp, item)
 
-    --                 end    
+                    end    
 
-    --                 self.gameBox.boxData[i][j] =  self.temp_data[i][j]    
+                    self.gameBox.boxData[i][j] =  self.tempBoxData[i][j]    
 
-    --             end
+                end
 
-    --             self.gameBox.items[i] = {}
-    --         end
+                self.gameBox.gameItems[i] = {}
+            end
 
-    --         for i,v in ipairs(temp) do
+            for i,v in ipairs(temp) do
 
-    --             self.gameBox.items[v.index_x][v.index_y] = v
+                self.gameBox.gameItems[v.index_x][v.index_y] = v
 
-    --         end
+            end
 
-    --     else
-    --         for i=1,8 do
-    --             for j=1,8 do
-    --                 item = self.gameBox.items[i][j]
+        else
+            for i=1,8 do
+                for j=1,8 do
+                    item = self.gameBox.gameItems[i][j]
 
-    --                 if item then
-    --                     item:moveBack()
-    --                 end        
-    --             end
-    --         end
-    --     end
-    --         --todo
-    --     self.three_validated = false
+                    if item then
+                        item:moveBack()
+                    end        
+                end
+            end
+        end
+        self.threeValidated = false
 
-    --     self.direction = DIRECTION_NORMAL
+        self.direction = DIRECTION_IDLE
+
+        app.gameModel.fsm:HandleEvent("idle")
     elseif app.gameModel.fsm.mCurState.mName == "idle" then
 
         if self.gameBox:selectItems(x,y) then 
@@ -358,13 +344,13 @@ end
     逻辑 定时器 滑动的处理 游戏数据的处理应该 定义一个Model
 ]]
 function GameScene:logic(dt)
-    if self.state == GAME_THREE and self.direction ~= DIRECTION_NORMAL then
-        if not self.three_validated then
-            self.three_validated = true
+    if app.gameModel.fsm.mCurState.mName == "three" and self.direction ~= DIRECTION_NORMAL then
+        if not self.threeValidated then
+            self.threeValidated = true
 
             for i=1,ROW_COUNT do
                 for j=1,COL_COUNT do
-                    self.temp_data[i][j] = self.gameBox.boxData[i][j]
+                    self.tempBoxData[i][j] = self.gameBox.boxData[i][j]
                 end
             end
 
@@ -372,32 +358,27 @@ function GameScene:logic(dt)
             if self.direction == DIRECTION_LEFT then
                 for y=1,ROW_COUNT do
                     for x=2,COL_COUNT do
-                        local item = self.gameBox.items[x][y]
+                        local item = self.gameBox.gameItems[x][y]
                         if item then
-
-                            local dst_item = self.gameBox.items[x - 1][y]
+                            local dst_item = self.gameBox.gameItems[x - 1][y]
                             
-                            if self.temp_data[x - 1][y] ~= 0 then
-
+                            if self.tempBoxData[x - 1][y] ~= 0 then
                                 if dst_item == nil then
-
-                                    self.temp_data[x - 1][y] = 0
+                                    self.tempBoxData[x - 1][y] = 0
 
                                     self.gameBox.boxData[x - 1][y] = 0
-
                                 elseif dst_item.kind + item.kind == 3 then
-
                                     item.enable_left = true
 
-                                    self.temp_data[x][y] = 3
+                                    self.tempBoxData[x][y] = 3
 
-                                    self.temp_data[x - 1][y] = self.temp_data[x][y]
+                                    self.tempBoxData[x - 1][y] = self.tempBoxData[x][y]
 
-                                    self.temp_data[x][y] = 0
+                                    self.tempBoxData[x][y] = 0
 
                                     item:become3()
 
-                                    TableUtil:push(self.remove_items, dst_item)
+                                    TableUtil:push(self.removeItems, dst_item)
 
                                 else 
 
@@ -409,9 +390,9 @@ function GameScene:logic(dt)
                                 
                                 item.enable_left = true
 
-                                self.temp_data[x - 1][y] = self.temp_data[x][y]
+                                self.tempBoxData[x - 1][y] = self.tempBoxData[x][y]
 
-                                self.temp_data[x][y] = 0
+                                self.tempBoxData[x][y] = 0
 
                             end
 
@@ -425,17 +406,17 @@ function GameScene:logic(dt)
                 for y=1,COL_COUNT do
                     for x=ROW_COUNT - 1,1,-1 do
 
-                        local item = self.gameBox.items[x][y]
+                        local item = self.gameBox.gameItems[x][y]
 
                         if item then
 
-                            local dst_item = self.gameBox.items[x + 1][y]
+                            local dst_item = self.gameBox.gameItems[x + 1][y]
                             
-                            if self.temp_data[x + 1][y] ~= 0 then
+                            if self.tempBoxData[x + 1][y] ~= 0 then
 
                                 if dst_item == nil then
 
-                                    self.temp_data[x + 1][y] = 0
+                                    self.tempBoxData[x + 1][y] = 0
 
                                     self.gameBox.boxData[x + 1][y] = 0
 
@@ -443,16 +424,16 @@ function GameScene:logic(dt)
 
                                     item.enable_right = true
 
-                                    self.temp_data[x][y] = 3
+                                    self.tempBoxData[x][y] = 3
 
-                                    self.temp_data[x + 1][y] = self.temp_data[x][y]
+                                    self.tempBoxData[x + 1][y] = self.tempBoxData[x][y]
 
-                                    self.temp_data[x][y] = 0
+                                    self.tempBoxData[x][y] = 0
 
                                     item:become3()
 
 
-                                    TableUtil:push(self.remove_items, dst_item)
+                                    TableUtil:push(self.removeItems, dst_item)
 
 
                                 else 
@@ -465,9 +446,9 @@ function GameScene:logic(dt)
                                 
                                 item.enable_right = true
 
-                                self.temp_data[x + 1][y] = self.temp_data[x][y]
+                                self.tempBoxData[x + 1][y] = self.tempBoxData[x][y]
 
-                                self.temp_data[x][y] = 0
+                                self.tempBoxData[x][y] = 0
 
                             end
 
@@ -478,17 +459,17 @@ function GameScene:logic(dt)
                 for x=1,ROW_COUNT do
                     for y=COL_COUNT,1,-1 do
 
-                        local item = self.gameBox.items[x][y]
+                        local item = self.gameBox.gameItems[x][y]
 
                         if item then
 
-                            local dst_item = self.gameBox.items[x][y + 1]
+                            local dst_item = self.gameBox.gameItems[x][y + 1]
                             
-                            if self.temp_data[x][y + 1] ~= 0 then
+                            if self.tempBoxData[x][y + 1] ~= 0 then
 
                                 if dst_item == nil then
 
-                                    self.temp_data[x][y + 1] = 0
+                                    self.tempBoxData[x][y + 1] = 0
 
                                     self.gameBox.boxData[x][y + 1] = 0
 
@@ -496,16 +477,16 @@ function GameScene:logic(dt)
 
                                     item.enable_up = true
 
-                                    self.temp_data[x][y] = 3
+                                    self.tempBoxData[x][y] = 3
 
-                                    self.temp_data[x][y + 1] = self.temp_data[x][y]
+                                    self.tempBoxData[x][y + 1] = self.tempBoxData[x][y]
 
-                                    self.temp_data[x][y] = 0
+                                    self.tempBoxData[x][y] = 0
 
                                     item:become3()
 
 
-                                    TableUtil:push(self.remove_items, dst_item)
+                                    TableUtil:push(self.removeItems, dst_item)
 
 
                                 else 
@@ -518,9 +499,9 @@ function GameScene:logic(dt)
                                 
                                 item.enable_up = true
 
-                                self.temp_data[x][y + 1] = self.temp_data[x][y]
+                                self.tempBoxData[x][y + 1] = self.tempBoxData[x][y]
 
-                                self.temp_data[x][y] = 0
+                                self.tempBoxData[x][y] = 0
 
                             end
 
@@ -532,17 +513,17 @@ function GameScene:logic(dt)
                 for x=1,ROW_COUNT do
                     for y=2,COL_COUNT do
 
-                        local item = self.gameBox.items[x][y]
+                        local item = self.gameBox.gameItems[x][y]
 
                         if item then
 
-                            local dst_item = self.gameBox.items[x][y - 1]
+                            local dst_item = self.gameBox.gameItems[x][y - 1]
                             
-                            if self.temp_data[x][y - 1] ~= 0 then
+                            if self.tempBoxData[x][y - 1] ~= 0 then
 
                                 if dst_item == nil then
 
-                                    self.temp_data[x][y - 1] = 0
+                                    self.tempBoxData[x][y - 1] = 0
 
                                     self.gameBox.boxData[x][y - 1] = 0
 
@@ -550,16 +531,16 @@ function GameScene:logic(dt)
 
                                     item.enable_down = true
 
-                                    self.temp_data[x][y] = 3
+                                    self.tempBoxData[x][y] = 3
 
-                                    self.temp_data[x][y - 1] = self.temp_data[x][y]
+                                    self.tempBoxData[x][y - 1] = self.tempBoxData[x][y]
 
-                                    self.temp_data[x][y] = 0
+                                    self.tempBoxData[x][y] = 0
 
                                     item:become3()
 
 
-                                    TableUtil:push(self.remove_items, dst_item)
+                                    TableUtil:push(self.removeItems, dst_item)
 
 
                                 else 
@@ -572,9 +553,9 @@ function GameScene:logic(dt)
                                 
                                 item.enable_down = true
 
-                                self.temp_data[x][y - 1] = self.temp_data[x][y]
+                                self.tempBoxData[x][y - 1] = self.tempBoxData[x][y]
 
-                                self.temp_data[x][y] = 0
+                                self.tempBoxData[x][y] = 0
 
                             end
 
@@ -598,7 +579,7 @@ function GameScene:logic(dt)
 
             for i=COL_COUNT,1,-1 do
 
-                print(self.temp_data[1][i],self.temp_data[2][i],self.temp_data[3][i],self.temp_data[4][i],self.temp_data[5][i],self.temp_data[6][i])
+                print(self.tempBoxData[1][i],self.tempBoxData[2][i],self.tempBoxData[3][i],self.tempBoxData[4][i],self.tempBoxData[5][i],self.tempBoxData[6][i])
 
             end
 
@@ -606,11 +587,11 @@ function GameScene:logic(dt)
 
     end
 
-    if self.three_validated and self.direction ~= DIRECTION_NORMAL then
+    if self.threeValidated and self.direction ~= DIRECTION_NORMAL then
         local item = nil
         for i=1,ROW_COUNT do
             for j=1,COL_COUNT do
-                item = self.gameBox.items[i][j]
+                item = self.gameBox.gameItems[i][j]
                 if item then
                     item:moveThree(self.direction,self.distance)
                 end

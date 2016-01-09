@@ -48,20 +48,7 @@ function GameModel:initModel()
 	-- 初始化状态 
     self.fsm:Start(GAME_IDLE)
 
-    -- 这个忘了有没有用
-    self.touchID = -1
-    self.objectCount = 0
 
-    -- 设置方向
-    self.direction = DIRECTION_IDLE
-
-    -- 是否已经验证
-    self.threeValidated = false 
-
-    local BoxData = require("app.Game.BoxData")
-
-    -- 临时存储的数据
-    self.tempBoxData = BoxData.new()
 
 
 end
