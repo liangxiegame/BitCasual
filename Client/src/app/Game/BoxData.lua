@@ -15,7 +15,7 @@ function BoxData:initData()
 	for row_index = 1,ROW_COUNT do 
 		self[row_index] = {}
 		for col_index = 1,COL_COUNT do 
-			self[col_index] = 0
+			self[row_index][col_index] = 0
 		end 
 	end 
 end

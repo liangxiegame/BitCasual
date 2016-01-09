@@ -107,16 +107,23 @@ function GameScene:onTouchBegan(x, y)
         app.gameModel.fsm:HandleEvent("1010")
         self.matrixNode:pos(x - ITEM_DISTANCE * 1.5,y - ITEM_DISTANCE * 0.5)
         self.gameBox:cancelSelected()
-    -- 否则是其他 模式 要确定模式
-    else
-        if self.gameBox:inSelected(x,y) then
 
-            app.gameModel.fsm:HandleEvent("crush")
-        else
-            app.gameModel.fsm:HandleEvent("three")
+    -- 第二次的时候 优先级比较高一些
+    elseif self.gameBox:inSelectedItems(x,y)  then 
 
-            self.gameBox:cancelSelected()
-        end
+        -- app.gameModel.fsm:HandleEvent("crush")
+
+
+        -- 第二次的时候
+        -- if sthen
+            -- if self.gameBox.state == CRUSH_IDLE then 
+                -- self.gameBox.state = CRUSH_BEGAN1  
+            -- end 
+        -- else
+            -- app.gameModel.fsm:HandleEvent("three")
+
+            -- self.gameBox:cancelSelected()
+        -- end
     end
 
     return true
@@ -126,71 +133,180 @@ end
 function GameScene:onTouchMoved(x, y)
 
     if app.gameModel.fsm.mCurState.mName == "1010" then
+
         self.matrixNode:pos(x - ITEM_DISTANCE * 1.5,y - ITEM_DISTANCE * 0.5)
         self.gameBox:move1010(self.matrixNode)
 
-    elseif self.model.fsm.mCurState.mName == "idle" or self.model.fsm.mCurState.mName == "crush" then
+    -- elseif self.model.fsm.mCurState.mName == "idle" or self.model.fsm.mCurState.mName == "crush" then
 
-        self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
+    --     self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
 
-        if self.direction == DIRECTION_NORMAL and cc.pGetDistance(cc.p(x ,y), cc.p(self.touchBeganX, self.touchBeganY)) > 5 then
-            self.state = GAME_THREE
+    --     if self.direction == DIRECTION_NORMAL and cc.pGetDistance(cc.p(x ,y), cc.p(self.touchBeganX, self.touchBeganY)) > 5 then
 
-            local dist_x = x - self.touch_began_x
-            local dist_y = y - self.touch_began_y
+    --         self.model.fsm:HandleEvent("three")
 
-            if dist_x > math.abs(dist_y) then
-                print("right")
+    --         local dist_x = x - self.touch_began_x
+    --         local dist_y = y - self.touch_began_y
 
-                self.direction = DIRECTION_RIGHT
-            end
+    --         if dist_x > math.abs(dist_y) then
+    --             print("right")
 
-            if -dist_x > math.abs(dist_y) then
+    --             self.direction = DIRECTION_RIGHT
+    --         end
 
-                print("left")
+    --         if -dist_x > math.abs(dist_y) then
 
-                self.direction = DIRECTION_LEFT
+    --             print("left")
 
-            end
+    --             self.direction = DIRECTION_LEFT
 
-            if dist_y > math.abs(dist_x) then
+    --         end
 
-                print("up")
+    --         if dist_y > math.abs(dist_x) then
 
-                self.direction = DIRECTION_UP
+    --             print("up")
 
-            end
+    --             self.direction = DIRECTION_UP
 
-            if -dist_y > math.abs(dist_x) then
+    --         end
 
-                print("down")
+    --         if -dist_y > math.abs(dist_x) then
 
-                self.direction = DIRECTION_DOWN
-            end
+    --             print("down")
 
-            self.gameBox:cancelSelected()
-        end
+    --             self.direction = DIRECTION_DOWN
+    --         end
 
-    -- 在滑动的时候能确定是 小三模式
-    elseif self.state ==  GAME_THREE then
-        self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
+    --         self.gameBox:cancelSelected()
+    --     end
+
+    -- -- 在滑动的时候能确定是 小三模式
+    -- elseif self.state ==  GAME_THREE then
+    --     self.distance = cc.p(x - self.touch_began_x,y - self.touch_began_y)
     end
 end
 
+function GameScene:onTouchEnded(x, y)
+
+    if app.gameModel.fsm.mCurState.mName == "1010" then
+
+        -- 放下了
+        if self.gameBox:push(self.matrixNode) then
+
+            self.matrixNode:genNewOne()
+            audio.playSound("res/sound/push.wav", false)
+        end
+
+        self.matrixNode:reset() -- 初始化
+        app.gameModel.fsm:HandleEvent("idle")
+
+    -- elseif self.state == GAME_THREE then
+    --     self.state =GAME_IDLE 
+    --     if self.distance.x < -ITEM_DISTANCE * 0.5 or self.distance.x > ITEM_DISTANCE * 0.5 or self.distance.y < -ITEM_DISTANCE * 0.5 or self.distance.y > ITEM_DISTANCE * 0.5 then
+
+    --         local temp = {}
+
+    --         -- 删除掉
+    --         local index_x = 0
+    --         local index_y = 0
+    --         local item = nil
+
+    --         for i=1,table.nums(self.remove_items) do
+    --             item = self.remove_items[i]
+    --             index_x = item.index_x
+    --             index_y = item.index_y
+
+    --             item:removeFromParent()
+    --             self.remove_items[i] = nil
+
+    --             self.gameBox.items[index_x][index_y] = nil
+    --         end
+
+    --         self.remove_items = {}
+
+    --         local item = nil
+
+    --         for i=1,ROW_COUNT do
+
+    --             for j=1,COL_COUNT do
+                    
+    --                 item = self.gameBox.items[i][j]
+
+    --                 if item then
+                        
+    --                     item:step(self.direction)  
+
+    --                     TableUtil:push(temp, item)
+
+    --                 end    
+
+    --                 self.gameBox.boxData[i][j] =  self.temp_data[i][j]    
+
+    --             end
+
+    --             self.gameBox.items[i] = {}
+    --         end
+
+    --         for i,v in ipairs(temp) do
+
+    --             self.gameBox.items[v.index_x][v.index_y] = v
+
+    --         end
+
+    --     else
+    --         for i=1,8 do
+    --             for j=1,8 do
+    --                 item = self.gameBox.items[i][j]
+
+    --                 if item then
+    --                     item:moveBack()
+    --                 end        
+    --             end
+    --         end
+    --     end
+    --         --todo
+    --     self.three_validated = false
+
+    --     self.direction = DIRECTION_NORMAL
+    elseif app.gameModel.fsm.mCurState.mName == "idle" then
+
+        if self.gameBox:selectItems(x,y) then 
+            app.gameModel.fsm:HandleEvent("crush")
+        end 
+
+    elseif app.gameModel.fsm.mCurState.mName == "crush" then 
+
+        if self.gameBox:crush(x,y) then 
+            app.gameModel.fsm:HandleEvent("idle")
+        elseif self.gameBox:selectItems(x,y) then 
+
+        else
+            app.gameModel.fsm:HandleEvent("idle")
+        end 
+
+    end
+
+    self:crushMatrixObject()
+end
+
+
+-- @private
+-- 消除横行和竖行
 function GameScene:crushMatrixObject()
     self.row_bricks = {}
     self.col_bricks = {}
+
     for i=1,ROW_COUNT do
         local tagRow = 0
         local tagCol = 0            
         for j=1,COL_COUNT do
-            if self.gameBox.base_data[j][i] == 3 then
+            if self.gameBox.boxData[j][i] == CHILD then
                 tagRow = tagRow + 1
             end
         end
 
         for j=1,COL_COUNT do
-            if self.gameBox.base_data[i][j] == 3 then
+            if self.gameBox.boxData[i][j] == CHILD then
                 tagCol = tagCol + 1
             end
         end
@@ -213,12 +329,13 @@ function GameScene:crushMatrixObject()
     for i=1,ROW_COUNT do
         for j=1,COL_COUNT do
             if self.col_bricks[i] == 1 or self.row_bricks[j] == 1 then
-                local brick = self.gameBox.items[i][j]
-                if brick then
+                local item = self.gameBox.hitItems[i][j]
+                if item then
                     line_count = line_count + 1
-                    self.gameBox.base_data[i][j] = 0
-                    self.gameBox.items[i][j]:removeFromParent()
-                    self.gameBox.items[i][j] = nil
+                    self.gameBox.boxData[i][j] = 0
+                    -- self.gameBox.gameItems
+                    item:hide()
+                    item:setKind(0)
                 end
             end
         end
@@ -228,113 +345,13 @@ function GameScene:crushMatrixObject()
         self.gameClock.number:AddNumber(10 - self.gameClock.number:getNumber())
     end 
 
-    self.scoreLabel.number:AddNumber(line_count * 10)
+    line_count = math.modf(line_count / 6)
+    self.scoreLabel.number:AddNumber(line_count * 100)
 
     if line_count ~= 0 then
         self.gameClock:ResetTime()
         audio.playSound("res/sound/crushline.wav", false)
     end
-end
-
-function GameScene:onTouchEnded(x, y)
-
-    if app.gameModel.fsm.mCurState.mName == "1010" then
-
-        if self.gameBox:push(self.matrixNode) then
-
-            self.matrixNode:genNewOne()
-            audio.playSound("res/sound/push.wav", false)
-        end
-
-        self.matrixNode:reset()
-
-    -- if cc.PLATFORM_OS_IPAD == targetPlatform then
-    --     self.cur_matrix:scale(0.5)
-    --     self.cur_matrix:pos(display.cx - ITEM_DISTANCE * 1.5,display.height - ITEM_DISTANCE * 5)
-    -- end        
-
-        app.gameModel.fsm:HandleEvent("idle")
-
-    elseif self.state == GAME_THREE then
-        self.state =GAME_IDLE 
-        if self.distance.x < -ITEM_DISTANCE * 0.5 or self.distance.x > ITEM_DISTANCE * 0.5 or self.distance.y < -ITEM_DISTANCE * 0.5 or self.distance.y > ITEM_DISTANCE * 0.5 then
-
-            local temp = {}
-
-            -- 删除掉
-            local index_x = 0
-            local index_y = 0
-            local item = nil
-
-            for i=1,table.nums(self.remove_items) do
-                item = self.remove_items[i]
-                index_x = item.index_x
-                index_y = item.index_y
-
-                item:removeFromParent()
-                self.remove_items[i] = nil
-
-                self.gameBox.items[index_x][index_y] = nil
-            end
-
-            self.remove_items = {}
-
-            local item = nil
-
-            for i=1,ROW_COUNT do
-
-                for j=1,COL_COUNT do
-                    
-                    item = self.gameBox.items[i][j]
-
-                    if item then
-                        
-                        item:step(self.direction)  
-
-                        TableUtil:push(temp, item)
-
-                    end    
-
-                    self.gameBox.base_data[i][j] =  self.temp_data[i][j]    
-
-                end
-
-                self.gameBox.items[i] = {}
-            end
-
-            for i,v in ipairs(temp) do
-
-                self.gameBox.items[v.index_x][v.index_y] = v
-
-            end
-
-        else
-            for i=1,8 do
-                for j=1,8 do
-                    item = self.gameBox.items[i][j]
-
-                    if item then
-                        item:moveBack()
-                    end        
-                end
-            end
-        end
-            --todo
-        self.three_validated = false
-
-        self.direction = DIRECTION_NORMAL
-    else
-        -- print("···")
-        -- print("------------------------")
-        -- print("first touch",self.gameBox.first_touch)
-
-        self.gameBox:ended(x, y)
-
-        -- print("first touch",self.gameBox.first_touch)
-        -- print("------------------------")
-    end
-
-    self:crushMatrixObject()
 end
 
 --[[
@@ -347,7 +364,7 @@ function GameScene:logic(dt)
 
             for i=1,ROW_COUNT do
                 for j=1,COL_COUNT do
-                    self.temp_data[i][j] = self.gameBox.base_data[i][j]
+                    self.temp_data[i][j] = self.gameBox.boxData[i][j]
                 end
             end
 
@@ -366,7 +383,7 @@ function GameScene:logic(dt)
 
                                     self.temp_data[x - 1][y] = 0
 
-                                    self.gameBox.base_data[x - 1][y] = 0
+                                    self.gameBox.boxData[x - 1][y] = 0
 
                                 elseif dst_item.kind + item.kind == 3 then
 
@@ -420,7 +437,7 @@ function GameScene:logic(dt)
 
                                     self.temp_data[x + 1][y] = 0
 
-                                    self.gameBox.base_data[x + 1][y] = 0
+                                    self.gameBox.boxData[x + 1][y] = 0
 
                                 elseif dst_item.kind + item.kind == 3 then
 
@@ -473,7 +490,7 @@ function GameScene:logic(dt)
 
                                     self.temp_data[x][y + 1] = 0
 
-                                    self.gameBox.base_data[x][y + 1] = 0
+                                    self.gameBox.boxData[x][y + 1] = 0
 
                                 elseif dst_item.kind + item.kind == 3 then
 
@@ -527,7 +544,7 @@ function GameScene:logic(dt)
 
                                     self.temp_data[x][y - 1] = 0
 
-                                    self.gameBox.base_data[x][y - 1] = 0
+                                    self.gameBox.boxData[x][y - 1] = 0
 
                                 elseif dst_item.kind + item.kind == 3 then
 
@@ -566,9 +583,9 @@ function GameScene:logic(dt)
                 end
             end
 
-            print("base_data")
+            print("boxData")
 
-            local a = self.gameBox.base_data
+            local a = self.gameBox.boxData
 
             for i=ROW_COUNT,1,-1 do
 

@@ -28,11 +28,6 @@ function GameClock:setupNodes()
 	self.number:AddNumber(10)
 end
 
--- @public
-function GameClock:getNumber()
-	return self.number.curNum
-end
-
 
 function GameClock:startTick()
 	-- body
@@ -52,6 +47,8 @@ function GameClock:startTick()
 
 	action = self:schedule(tick,1.0)
 end
+
+
 
 return GameClock
 

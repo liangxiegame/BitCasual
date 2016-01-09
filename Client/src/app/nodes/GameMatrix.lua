@@ -90,7 +90,7 @@ function GameMatrix:reset()
 end
 
 function GameMatrix:posCenter(x,y)
-	self:pos(-ITEM_DISTANCE * 1.5 + x,ITEM_DISTANCE * 1.5 + y)
+	self:pos(-ITEM_DISTANCE * 0.5 * 1.5 + x,ITEM_DISTANCE * 2 * 1.5 + y)
 	return self 
 end
 

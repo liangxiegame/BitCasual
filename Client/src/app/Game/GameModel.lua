@@ -33,6 +33,8 @@ function GameModel:setupFSM( )
     self.fsm:AddTranslation(GAME_IDLE, "crush", GAME_CRUSH)
     self.fsm:AddTranslation(GAME_IDLE, "three", GAME_THREE)
 
+    self.fsm:AddTranslation(GAME_CRUSH, "1010", GAME_1010)
+    
     self.fsm:AddTranslation(GAME_1010, "idle", GAME_IDLE)
     self.fsm:AddTranslation(GAME_CRUSH,"idle", GAME_IDLE)
     self.fsm:AddTranslation(GAME_THREE,"idle", GAME_IDLE)

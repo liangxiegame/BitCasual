@@ -23,3 +23,5 @@ ITEM_DISTANCE = 100			-- 元素之间的距离
 ROW_COUNT = 6				-- 行数
 COL_COUNT = 6				-- 列数
 
+CRUSH_IDLE  =  1			-- 默认状态
+CRUSH_BEGAN1 = 2		    -- 按到了

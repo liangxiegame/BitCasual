@@ -7,6 +7,7 @@ require("indie.init")
 require("app.model.matrices")
 require("app.model.algorithm")
 
+require("app.manager.DataManager")
 require("app.utils.ImageUtil")
 require("app.utils.GUIUtil")
 require("app.utils.TableUtil")

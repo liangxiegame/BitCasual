@@ -36,6 +36,10 @@ function QNumber:setNumber(num)
     self:setFrames(numArray)
 end
 
+function QNumber:getNumber( )
+    return self.curNum
+end
+
 --处理后显示数字 没有变数过程
 function QNumber:replaceNumber(num)
     self:setFrames(QMathUtil.ArrayForNumber(num))
