@@ -1,7 +1,5 @@
-*.ccs
-*.cfg
-cocosstudio
-config.json
-frameworks
-*.rp
-runtime
+Library/
+LuaEncoder/
+Server/
+ReadMe.txt
+
