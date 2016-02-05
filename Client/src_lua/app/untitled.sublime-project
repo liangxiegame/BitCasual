@@ -1,9 +1,0 @@
-{
-	"folders":
-	[
-		{
-			"path": "/Users/liangxie/Desktop/work/PokerFinal",
-			"exlude_pattern_file":["*.meta","*.lua.meta"],
-		}
-	]
-}

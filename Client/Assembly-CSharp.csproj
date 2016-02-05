@@ -45,8 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
-     <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -184,107 +182,49 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
-     <Compile Include="Assets\QuickUnity\Script\2d\QNode.cs" />
-     <Compile Include="Assets\QuickUnity\Script\2d\QTween.cs" />
-     <Compile Include="Assets\QuickUnity\Script\internal\QAlgoFunc.cs" />
-     <Compile Include="Assets\QuickUnity\Script\particle\QLightCircle.cs" />
-     <Compile Include="Assets\QuickUnity\Script\particle\core\AfterburnerPhysicsForce.cs" />
-     <Compile Include="Assets\QuickUnity\Script\util\QMath.cs" />
-     <Compile Include="Assets\QuickUnity\Script\util\QPrint.cs" />
-     <Compile Include="Assets\QuickUnity\Script\util\QTimer.cs" />
-     <Compile Include="Assets\QuickUnity\Script\util\QTrans.cs" />
-     <Compile Include="Assets\Script\Game\GameItem.cs" />
-     <Compile Include="Assets\Scripts\App\App.cs" />
-     <Compile Include="Assets\Scripts\App\AppConstant.cs" />
-     <Compile Include="Assets\Scripts\App\CommonGUI\NumberLabel.cs" />
-     <Compile Include="Assets\Scripts\App\Manager\DataManager.cs" />
-     <Compile Include="Assets\Scripts\App\Manager\GameManager.cs" />
-     <Compile Include="Assets\Scripts\App\Manager\GoManager.cs" />
-     <Compile Include="Assets\Scripts\App\Models\CoinModel.cs" />
-     <Compile Include="Assets\Scripts\App\Models\EnemyModel.cs" />
-     <Compile Include="Assets\Scripts\App\Models\FruitModel.cs" />
-     <Compile Include="Assets\Scripts\App\Models\PropModel.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Background\Bg1.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Background\Bg2.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Background\Bg3.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Background\Bg4.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Background\BgCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Background\IBg.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Game\GameCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Game\GameModel.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Game\PlayerCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Game\PlayerModel.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Stage\Stage.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Stage\StageCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Stage\StageModel.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\FirstLayerData.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\IStageDataGenerator.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\LevelLogic.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Stage1DataGenerator.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Stage2DataGenerator.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Stage3DataGenerator.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Stage4DataGenerator.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\StageDataDefine.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Theme1DataDefine.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Theme2DataDefine.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Theme3DataDefine.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\Theme\Theme4DataDefine.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\EnergyProgressView.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\ForeWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\GameProgressView.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\GameWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\GoldShopView.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\HomeWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\InputCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\OverWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\PauseWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\PropShopView.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\SettingWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\ShopGoldItem.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\ShopPropItem.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\ShopWnd.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\UICtrl.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\UIFade.cs" />
-     <Compile Include="Assets\Scripts\App\Modules\UI\UIModel.cs" />
-     <Compile Include="Assets\Scripts\App\View\BlockAir.cs" />
-     <Compile Include="Assets\Scripts\App\View\Coin.cs" />
-     <Compile Include="Assets\Scripts\App\View\Coins.cs" />
-     <Compile Include="Assets\Scripts\App\View\Enemy.cs" />
-     <Compile Include="Assets\Scripts\App\View\Fruit.cs" />
-     <Compile Include="Assets\Scripts\App\View\Loop.cs" />
-     <Compile Include="Assets\Scripts\App\View\MagnetiteCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\View\MagnetiteEffect.cs" />
-     <Compile Include="Assets\Scripts\App\View\Prop.cs" />
-     <Compile Include="Assets\Scripts\App\View\Protect.cs" />
-     <Compile Include="Assets\Scripts\App\ViewController\CameraCtrl.cs" />
-     <Compile Include="Assets\Scripts\App\ViewController\Camera_Zoom.cs" />
-     <Compile Include="Assets\Scripts\Framework\Config\ConfigMgr.cs" />
-     <Compile Include="Assets\Scripts\Framework\DesignPattern\FSM.cs" />
-     <Compile Include="Assets\Scripts\Framework\DesignPattern\MonoSingleton.cs" />
-     <Compile Include="Assets\Scripts\Framework\DesignPattern\Singleton.cs" />
-     <Compile Include="Assets\Scripts\Framework\Log\FileLogOutput.cs" />
-     <Compile Include="Assets\Scripts\Framework\Log\ILogOutput.cs" />
-     <Compile Include="Assets\Scripts\Framework\Log\Logger.cs" />
-     <Compile Include="Assets\Scripts\Framework\Lua\LuaBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Framework\Manager\LuaMgr.cs" />
-     <Compile Include="Assets\Scripts\Framework\Manager\NetMgr.cs" />
-     <Compile Include="Assets\Scripts\Framework\Manager\ResMgr.cs" />
-     <Compile Include="Assets\Scripts\Framework\Manager\SceneMgr.cs" />
-     <Compile Include="Assets\Scripts\Framework\Manager\SoundMgr.cs" />
-     <Compile Include="Assets\Scripts\Framework\Net\NetMsg.cs" />
-     <Compile Include="Assets\Scripts\Framework\Net\ReceiverMsg.cs" />
-     <Compile Include="Assets\Scripts\Framework\Net\SenderMsg.cs" />
-     <Compile Include="Assets\Scripts\Framework\Profiler\Console.cs" />
-     <Compile Include="Assets\Scripts\Framework\Profiler\FPSCounter.cs" />
-     <Compile Include="Assets\Scripts\Framework\Profiler\MemoryDetector.cs" />
-     <Compile Include="Assets\Scripts\Framework\Resource\ILoader.cs" />
-     <Compile Include="Assets\Scripts\Framework\Resource\ResLoader.cs" />
-     <Compile Include="Assets\Scripts\Framework\Resource\SceneLoader.cs" />
-     <Compile Include="Assets\Scripts\Framework\Resource\Version.cs" />
-     <Compile Include="Assets\Scripts\Framework\Setting\Setting.cs" />
+     <Compile Include="Assets\QFrameWork\Script\2d\QNode.cs" />
+     <Compile Include="Assets\QFrameWork\Script\2d\QTween.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Config\ConfigMgr.cs" />
+     <Compile Include="Assets\QFrameWork\Script\DesignPattern\QFSM.cs" />
+     <Compile Include="Assets\QFrameWork\Script\DesignPattern\QMonoSingleton.cs" />
+     <Compile Include="Assets\QFrameWork\Script\DesignPattern\QSingleton.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Log\FileLogOutput.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Log\ILogOutput.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Log\Logger.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Lua\LuaBehaviour.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Manager\LuaMgr.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Manager\NetMgr.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Manager\ResMgr.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Manager\SceneMgr.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Manager\SoundMgr.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Net\NetMsg.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Net\ReceiverMsg.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Net\SenderMsg.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Profiler\Console.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Profiler\FPSCounter.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Profiler\MemoryDetector.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Resource\ILoader.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Resource\ResLoader.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Resource\SceneLoader.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Resource\Version.cs" />
+     <Compile Include="Assets\QFrameWork\Script\Setting\Setting.cs" />
+     <Compile Include="Assets\QFrameWork\Script\interface\ICtrl.cs" />
+     <Compile Include="Assets\QFrameWork\Script\interface\IModel.cs" />
+     <Compile Include="Assets\QFrameWork\Script\interface\IView.cs" />
+     <Compile Include="Assets\QFrameWork\Script\internal\QAlgoFunc.cs" />
+     <Compile Include="Assets\QFrameWork\Script\particle\QLightCircle.cs" />
+     <Compile Include="Assets\QFrameWork\Script\particle\core\AfterburnerPhysicsForce.cs" />
+     <Compile Include="Assets\QFrameWork\Script\util\QGo.cs" />
+     <Compile Include="Assets\QFrameWork\Script\util\QMath.cs" />
+     <Compile Include="Assets\QFrameWork\Script\util\QPrint.cs" />
+     <Compile Include="Assets\QFrameWork\Script\util\QTimer.cs" />
+     <Compile Include="Assets\QFrameWork\Script\util\QTrans.cs" />
+     <Compile Include="Assets\_Script\App.cs" />
+     <Compile Include="Assets\_Script\Game\GameBox.cs" />
+     <Compile Include="Assets\_Script\Game\GameItem.cs" />
+     <Compile Include="Assets\_Script\Game\GameScene.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.9.2.txt" />
-     <None Include="Assets\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
@@ -301,24 +241,16 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 3.shader" />
-     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
-     <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
-     <None Include="Assets\ReadMe.txt" />
-     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
-     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
-     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
-     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
@@ -330,32 +262,14 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
-     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
-     <None Include="Assets\Plugins\PathologicalGames\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
- <Reference Include="DOTween">
- <HintPath>/Users/liangxie/git/BitCasual/Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTween43">
- <HintPath>/Users/liangxie/git/BitCasual/Client/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
- </Reference>
- <Reference Include="DOTween46">
- <HintPath>/Users/liangxie/git/BitCasual/Client/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
- </Reference>
- <Reference Include="DOTween50">
- <HintPath>/Users/liangxie/git/BitCasual/Client/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
- </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{079D398E-4AFC-CD7E-7881-F923D075EBD1}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

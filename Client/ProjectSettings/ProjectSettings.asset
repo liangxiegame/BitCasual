@@ -340,9 +340,15 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: DefaultPackerPolicy
   scriptingDefineSymbols:
-    1: ASYNC_MODE
-    4: 
-    7: 
+    1: ASYNC_MODE;CROSS_PLATFORM_INPUT
+    2: CROSS_PLATFORM_INPUT
+    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    14: MOBILE_INPUT
+    15: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    16: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    17: MOBILE_INPUT
+    20: MOBILE_INPUT
   metroPackageName: SimpleFramework
   metroPackageVersion: 
   metroCertificatePath: 
