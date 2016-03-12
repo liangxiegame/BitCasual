@@ -2,7 +2,7 @@ require("config")
 
 require("cocos.init")
 require("framework.init")
-require("indie.init")
+require("qframecocosquick.init")
 
 require("app.model.matrices")
 require("app.model.algorithm")

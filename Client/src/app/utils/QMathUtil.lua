@@ -5,7 +5,6 @@ QMathUtil = {}
 
 require("app.utils.QTimer")
 
-
 local function CC_RADIANS_TO_DEGREES(angle)
 	return  angle * 57.29577951
 end
@@ -19,9 +18,7 @@ function QMathUtil:inShape(vectors,point,num)
 	-- QTimer:beganTime()
 
 	local verts = {}
-
 	local verts_length = {}
-
 	local vector_count = 0
 
 	if num == nil then
@@ -56,7 +53,6 @@ function QMathUtil:inShape(vectors,point,num)
 		return false
 	end
 end
-
 
 -- 数字转换为数组
 function QMathUtil.ArrayForNumber(num)

@@ -2,9 +2,9 @@ DrawUtil = {}
 
 function DrawUtil.DrawRect(parent,lc,size,color)
 	if DEBUG == 0 then return end 
-  local drawNode = cc.NVGDrawNode:create()
-  drawNode:addTo(parent)
-  drawNode:drawRect(lc,size,color)
+  	local drawNode = cc.NVGDrawNode:create()
+  	drawNode:addTo(parent)
+  	drawNode:drawRect(lc,size,color)
 end
 
 function DrawUtil.DrawPoint(parent,x,y,color)

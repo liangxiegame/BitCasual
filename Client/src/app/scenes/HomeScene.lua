@@ -18,7 +18,6 @@ function HomeScene:initData()
         DataManager.HomeMusicOn = true
         DataManager.GameMusicOn = false
     end 
-
 end
 
 function HomeScene:setupNodes()
@@ -46,7 +45,6 @@ function HomeScene:setupNodes()
         :pos(display.cx, display.cy * 0.6)
         :addTo(self)
         :addChild(display.newSprite(display.newSpriteFrame("start.png"), 0, 0))
-
 
     -- 帮助按钮
     cc.ui.UIPushButton.new(nil,{scale = false})
